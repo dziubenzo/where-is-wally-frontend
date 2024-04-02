@@ -14,6 +14,7 @@ const darkTheme = {
     large: '1.5rem',
     extraLarge: '2rem',
   },
+  mobile: '768px',
 };
 
 export default function Theme({ children }) {
