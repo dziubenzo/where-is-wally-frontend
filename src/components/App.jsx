@@ -1,8 +1,20 @@
+import { Outlet } from 'react-router-dom';
+import Footer from './Footer';
+import Header from './Header';
+import Router from './Router';
+import Theme from './Theme';
+import GlobalStyle from '../styles/GlobalStyle';
+
 function App() {
   return (
-    <>
-      <div>Working!</div>
-    </>
+    <Theme>
+      <GlobalStyle />
+      <Header />
+      <Router>
+        <Outlet />
+      </Router>
+      <Footer />
+    </Theme>
   );
 }
 
