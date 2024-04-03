@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './ErrorPage';
 import HomePage from './HomePage';
 import App from './App';
+import LevelsPage from './LevelsPage';
 
 function Router() {
   const router = createBrowserRouter([
@@ -16,6 +17,10 @@ function Router() {
         {
           path: '/',
           element: <HomePage />,
+        },
+        {
+          path: 'levels',
+          element: <LevelsPage />,
         },
       ],
     },
