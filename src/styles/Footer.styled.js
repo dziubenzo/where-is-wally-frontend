@@ -6,12 +6,12 @@ export const StyledFooter = styled.footer`
   align-items: center;
   gap: 8px;
 
-  img {
+  img[alt='GitHub Logo'] {
     height: 32px;
   }
 
   @media (hover: hover) {
-    img {
+    img[alt='GitHub Logo'] {
       transition: transform 0.5s ease-in;
 
       &:hover {
