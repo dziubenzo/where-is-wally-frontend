@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   *:focus-visible {
-    outline: 3px solid ${(props) => props.theme.colours.primary}  ;
+    outline: 3px solid ${(props) => props.theme.colours.primary};
   }
 
   body {
