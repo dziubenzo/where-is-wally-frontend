@@ -3,6 +3,7 @@ import ErrorPage from './ErrorPage';
 import HomePage from './HomePage';
 import App from './App';
 import LevelsPage from './LevelsPage';
+import LevelPage from './LevelPage';
 
 function Router() {
   const router = createBrowserRouter([
@@ -21,6 +22,10 @@ function Router() {
         {
           path: 'levels',
           element: <LevelsPage />,
+        },
+        {
+          path: 'levels/:id',
+          element: <LevelPage />,
         },
       ],
     },
