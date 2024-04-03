@@ -5,6 +5,7 @@ export const StyledHeader = styled.header`
   grid-template-columns: repeat(3, 1fr);
   place-items: center;
   gap: 64px;
+  margin-bottom: 2em;
 
   a[href='/'] {
     width: 125px;

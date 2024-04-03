@@ -5,6 +5,7 @@ export const StyledFooter = styled.footer`
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  margin-top: 2em;
 
   img[alt='GitHub Logo'] {
     height: 32px;
