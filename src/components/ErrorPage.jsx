@@ -1,14 +1,16 @@
 import { useRouteError } from 'react-router-dom';
+import { StyledErrorPage } from '../styles/ErrorPage.styled';
 
 function ErrorPage() {
   const error = useRouteError();
 
   return (
-    <div>
-      <h1>{error.status}</h1>
+    <StyledErrorPage>
+      <img src="/sad-face.svg" alt="Sad Emoticon" />
+      <h2>{error.status}</h2>
       <h1>{error.statusText}</h1>
-      <h1>{error.data || error.message}</h1>
-    </div>
+      <h3>{error.data || error.message}</h3>
+    </StyledErrorPage>
   );
 }
 
