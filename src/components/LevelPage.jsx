@@ -32,7 +32,7 @@ function LevelPage(props) {
   function handleImageClick(event) {
     const clickCoordinates = getCoordinates(imageRef, event);
     const newSelectorPos = getSelectorPosition(imageRef, event);
-    setShowSelector(true);
+    setShowSelector(!showSelector);
     setSelectorPos(newSelectorPos);
     return;
   }
