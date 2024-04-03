@@ -16,13 +16,16 @@ export const StyledHeader = styled.header`
     text-decoration: none;
     padding: 0.2em 0.5em;
     border-radius: 8px;
-    transition: background-color 0.2s ease-in;
   }
 
   @media (hover: hover) {
-    a[href='/levels']:hover,
-    a[href='/leaderboard']:hover {
-      background-color: ${(props) => props.theme.colours.tertiary};
+    a[href='/levels'],
+    a[href='/leaderboard'] {
+      transition: background-color 0.2s ease-in;
+
+      &:hover {
+        background-color: ${(props) => props.theme.colours.tertiary};
+      }
     }
   }
 
