@@ -79,7 +79,7 @@ function LevelPage(props) {
         onClick={handleImageClick}
         onMouseLeave={handleImageLeave}
         onMouseEnter={handleImageEnter}
-        onMouseMove={showZoomer && handleImageHover}
+        onMouseMove={showZoomer ? handleImageHover : undefined}
       />
       {showSelector && (
         <Selector coordinates={selectorPos} size={selectorSize} />
