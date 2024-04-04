@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import App from './App';
 import LevelsPage from './LevelsPage';
 import LevelPage from './LevelPage';
+import LeaderboardPage from './LeaderboardPage';
 
 function Router() {
   const router = createBrowserRouter([
@@ -26,6 +27,10 @@ function Router() {
         {
           path: 'levels/:id',
           element: <LevelPage />,
+        },
+        {
+          path: 'leaderboard',
+          element: <LeaderboardPage />,
         },
       ],
     },
