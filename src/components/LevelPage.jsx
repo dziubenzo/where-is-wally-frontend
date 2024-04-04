@@ -7,13 +7,17 @@ import {
   getSelectorSize,
 } from '../helpers';
 import Selector from './Selector';
+import Zoomer from './Zoomer';
 
 function LevelPage(props) {
   const imageRef = useRef(null);
 
   const [selectorSize, setSelectorSize] = useState(null);
-  const [selectorPos, setSelectorPos] = useState(null);
+  const [selectorPos, setSelectorPos] = useState({ x: 0, y: 0 });
   const [showSelector, setShowSelector] = useState(false);
+
+  const [showZoomer, setShowZoomer] = useState(false);
+  const [zoomPos, setZoomPos] = useState({ percentX: '50%', percentY: '50%' });
 
   // Calculate selector size upon component render
   // Hide selector and calculate its size whenever browser is resized
@@ -30,11 +34,35 @@ function LevelPage(props) {
   }, []);
 
   function handleImageClick(event) {
+    // Hide zoomer
+    setShowZoomer(false);
     const clickCoordinates = getCoordinates(imageRef, event);
     const newSelectorPos = getSelectorPosition(imageRef, event);
+    // Show zoomer again if selector is to be hidden
+    if (!showZoomer && showSelector) {
+      setShowZoomer(true);
+    }
     setShowSelector(!showSelector);
     setSelectorPos(newSelectorPos);
-    return;
+  }
+
+  function handleImageHover(event) {
+    // Update position of selector, menu and zoomer
+    const newSelectorPos = getSelectorPosition(imageRef, event);
+    setSelectorPos(newSelectorPos);
+    // Get precise percent values of large image for smooth zooming
+    const { percentX, percentY } = getCoordinates(imageRef, event, true);
+    // Update zoom
+    setZoomPos({ percentX, percentY });
+  }
+
+  function handleImageLeave() {
+    setShowZoomer(false);
+  }
+
+  function handleImageEnter() {
+    setShowZoomer(true);
+    setShowSelector(false);
   }
 
   return (
@@ -48,10 +76,14 @@ function LevelPage(props) {
         src="/wally-test.jpg"
         alt="Wally"
         onClick={handleImageClick}
+        onMouseLeave={handleImageLeave}
+        onMouseEnter={handleImageEnter}
+        onMouseMove={showZoomer && handleImageHover}
       />
       {showSelector && (
         <Selector coordinates={selectorPos} size={selectorSize} />
       )}
+      {showZoomer && <Zoomer coordinates={selectorPos} zoom={zoomPos} />}
     </StyledLevelPage>
   );
 }
