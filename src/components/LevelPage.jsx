@@ -69,6 +69,7 @@ function LevelPage(props) {
     <StyledLevelPage>
       <div>
         <p>Level: TODO</p>
+        <p>Characters Found: X/X</p>
         <p>Time: TODO</p>
       </div>
       <img
