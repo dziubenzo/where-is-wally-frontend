@@ -37,8 +37,8 @@ export const StyledMenu = styled.div.attrs((props) => ({
     left: `${props.coordinates.x - 185}px`,
   },
 }))`
-  position: absolute;
   width: 400px;
+  position: absolute;
   display: flex;
   justify-content: center;
   gap: 16px;
@@ -82,6 +82,7 @@ export const StyledZoomer = styled.div.attrs((props) => ({
     left: `${props.coordinates.x - 200}px`,
   },
 }))`
+  display: flex;
   height: 200px;
   width: 200px;
   position: absolute;

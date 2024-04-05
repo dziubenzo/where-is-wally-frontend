@@ -52,7 +52,7 @@ export function checkImageClick(clickX, clickY, characters) {
       }
     }
   }
-  return false;
+  return '';
 }
 
 // Class for API errors

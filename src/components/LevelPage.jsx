@@ -18,12 +18,23 @@ function LevelPage(props) {
 
   const imageRef = useRef(null);
 
+  // Selector states
   const [selectorSize, setSelectorSize] = useState(null);
   const [selectorPos, setSelectorPos] = useState({ x: 0, y: 0 });
   const [showSelector, setShowSelector] = useState(false);
 
+  // Magnifying glass states
   const [showZoomer, setShowZoomer] = useState(false);
   const [zoomPos, setZoomPos] = useState({ percentX: '50%', percentY: '50%' });
+
+  // Game flow states
+  const [charactersToFind, setCharactersToFind] = useState([
+    'wally',
+    'wenda',
+    'wizard',
+    'odlaw',
+  ]);
+  const [currentClick, setCurrentClick] = useState(false);
 
   // Calculate selector size upon component render
   // Hide selector and calculate its size whenever browser is resized
@@ -42,8 +53,10 @@ function LevelPage(props) {
   function handleImageClick(event) {
     // Hide zoomer
     setShowZoomer(false);
+    // Set state according to the result of the click (character name or empty string)
     const { percentX, percentY } = getCoordinates(imageRef, event);
-    checkImageClick(percentX, percentY, characters);
+    setCurrentClick(checkImageClick(percentX, percentY, characters));
+    // Calculate selector position
     const newSelectorPos = getSelectorPosition(imageRef, event);
     // Show zoomer again if selector is to be hidden
     if (!showZoomer && showSelector) {
@@ -76,7 +89,10 @@ function LevelPage(props) {
     <StyledLevelPage>
       <div>
         <p>Level: {name}</p>
-        <p>Characters Found: X/{characters.length}</p>
+        <p>
+          Characters Found: {characters.length - charactersToFind.length}/
+          {characters.length}
+        </p>
         <p>Time: TODO</p>
       </div>
       <img
@@ -89,7 +105,13 @@ function LevelPage(props) {
         onMouseMove={showZoomer ? handleImageHover : undefined}
       />
       {showSelector && (
-        <Selector coordinates={selectorPos} size={selectorSize} />
+        <Selector
+          coordinates={selectorPos}
+          size={selectorSize}
+          currentClick={currentClick}
+          charactersToFind={charactersToFind}
+          setCharactersToFind={setCharactersToFind}
+        />
       )}
       {showZoomer && (
         <Zoomer
