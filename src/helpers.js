@@ -62,3 +62,15 @@ export class ApiError extends Error {
     this.status = statusCode;
   }
 }
+
+// URLs of character button images
+export const characterImages = {
+  wally:
+    'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321197/where-is-wally/ic8mirwy2sevpresfwjf.png',
+  wenda:
+    'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321197/where-is-wally/xfa7vlvbt5yeaelsthvw.png',
+  wizard:
+    'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321422/where-is-wally/xaj4haqv5ffosok8yr7o.png',
+  odlaw:
+    'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321197/where-is-wally/jcrmujs7eunawcwcmuk4.png',
+};

@@ -45,7 +45,7 @@ export const StyledMenu = styled.div.attrs((props) => ({
   background-color: transparent;
 `;
 
-export const MenuButton = styled.button`
+export const StyledSelectorButton = styled.button`
   width: 100px;
   height: 150px;
   border: none;
