@@ -2,20 +2,27 @@ import PropTypes from 'prop-types';
 import { StyledLevelCard } from '../styles/LevelsPage.styled';
 import { Link } from 'react-router-dom';
 
-function LevelCard(props) {
+function LevelCard({ level }) {
+  const { url_parameter, name, image_url } = level;
+
   return (
     <StyledLevelCard>
-      <h2>1</h2>
-      <p>Level Name</p>
+      <h2>{url_parameter}</h2>
+      <p>{name}</p>
       <div>
-        <Link to="/levels/1">
-          <img src="/wally-test.jpg" alt="Wally Level 1" />
+        <Link to={`/levels/${url_parameter}`}>
+          <img
+            src={image_url}
+            alt={`Image Preview for Level ${url_parameter}`}
+          />
         </Link>
       </div>
     </StyledLevelCard>
   );
 }
 
-LevelCard.propTypes = {};
+LevelCard.propTypes = {
+  level: PropTypes.object,
+};
 
 export default LevelCard;

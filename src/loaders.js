@@ -36,3 +36,14 @@ export async function homePageLoader() {
   ]);
   return { levelsCount, playersCount, latestPlayer };
 }
+
+export async function levelsPageLoader() {
+  const resLevels = await fetch(`${API_URL}/levels`);
+  // Handle errors by triggering ErrorPage render with error status code and status text
+  if (!resLevels.ok) {
+    const error = new ApiError(resLevels.statusText, resLevels.status);
+    throw error;
+  }
+  const levels = await resLevels.json();
+  return levels;
+}
