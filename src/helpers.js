@@ -33,3 +33,11 @@ export function getSelectorSize(imageRef) {
   const { height } = imageRef.current.getBoundingClientRect();
   return Math.round((height * PERCENT_OF_IMAGE_HEIGHT) / 100);
 }
+
+// Class for API errors
+export class ApiError extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    this.status = statusCode;
+  }
+}

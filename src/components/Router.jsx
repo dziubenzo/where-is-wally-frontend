@@ -5,6 +5,7 @@ import App from './App';
 import LevelsPage from './LevelsPage';
 import LevelPage from './LevelPage';
 import LeaderboardPage from './LeaderboardPage';
+import { homePageLoader } from '../loaders';
 
 function Router() {
   const router = createBrowserRouter([
@@ -19,6 +20,7 @@ function Router() {
         {
           path: '/',
           element: <HomePage />,
+          loader: homePageLoader,
         },
         {
           path: 'levels',
