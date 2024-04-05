@@ -1,5 +1,5 @@
 // Calculate the x and y coordinates of a click relative to the image
-// Return them in both pixel and percent formats
+// Return them in percent format
 export function getCoordinates(imageRef, event, precise = false) {
   const { width, height, left, top } = imageRef.current.getBoundingClientRect();
   const positionX = Math.round(event.clientX - left);
@@ -11,7 +11,7 @@ export function getCoordinates(imageRef, event, precise = false) {
   }
   const percentX = Math.round((positionX / width) * 100);
   const percentY = Math.round((positionY / height) * 100);
-  return { positionX, positionY, percentX, percentY };
+  return { percentX, percentY };
 }
 
 // Calculate selector position
@@ -32,6 +32,27 @@ export function getSelectorSize(imageRef) {
   const PERCENT_OF_IMAGE_HEIGHT = 5;
   const { height } = imageRef.current.getBoundingClientRect();
   return Math.round((height * PERCENT_OF_IMAGE_HEIGHT) / 100);
+}
+
+// Check if image click is character click
+// Return character name or false otherwise
+export function checkImageClick(clickX, clickY, characters) {
+  const ERROR_THRESHOLD_PERCENT = 1;
+
+  for (const character of characters) {
+    // Set thresholds
+    const lowThresholdX = character.x - ERROR_THRESHOLD_PERCENT;
+    const highThresholdX = character.x + ERROR_THRESHOLD_PERCENT;
+    const lowThresholdY = character.y - ERROR_THRESHOLD_PERCENT;
+    const highThresholdY = character.y + ERROR_THRESHOLD_PERCENT;
+
+    if (clickX >= lowThresholdX && clickX <= highThresholdX) {
+      if (clickY >= lowThresholdY && clickY <= highThresholdY) {
+        return character.name;
+      }
+    }
+  }
+  return false;
 }
 
 // Class for API errors
