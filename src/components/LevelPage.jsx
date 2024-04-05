@@ -5,11 +5,17 @@ import {
   getCoordinates,
   getSelectorPosition,
   getSelectorSize,
+  checkImageClick,
 } from '../helpers';
 import Selector from './Selector';
 import Zoomer from './Zoomer';
+import { useLocation } from 'react-router-dom';
 
 function LevelPage(props) {
+  // Get level from Link prop
+  const { state } = useLocation();
+  const { url_parameter, name, image_url, characters } = state;
+
   const imageRef = useRef(null);
 
   const [selectorSize, setSelectorSize] = useState(null);
@@ -36,7 +42,8 @@ function LevelPage(props) {
   function handleImageClick(event) {
     // Hide zoomer
     setShowZoomer(false);
-    const clickCoordinates = getCoordinates(imageRef, event);
+    const { percentX, percentY } = getCoordinates(imageRef, event);
+    checkImageClick(percentX, percentY, characters);
     const newSelectorPos = getSelectorPosition(imageRef, event);
     // Show zoomer again if selector is to be hidden
     if (!showZoomer && showSelector) {
@@ -68,14 +75,14 @@ function LevelPage(props) {
   return (
     <StyledLevelPage>
       <div>
-        <p>Level: TODO</p>
-        <p>Characters Found: X/X</p>
+        <p>Level: {name}</p>
+        <p>Characters Found: X/{characters.length}</p>
         <p>Time: TODO</p>
       </div>
       <img
         ref={imageRef}
-        src="/wally-test.jpg"
-        alt="Wally"
+        src={image_url}
+        alt={`Where's Wally Image - Level ${url_parameter}`}
         onClick={handleImageClick}
         onMouseLeave={handleImageLeave}
         onMouseEnter={handleImageEnter}
@@ -84,7 +91,14 @@ function LevelPage(props) {
       {showSelector && (
         <Selector coordinates={selectorPos} size={selectorSize} />
       )}
-      {showZoomer && <Zoomer coordinates={selectorPos} zoom={zoomPos} />}
+      {showZoomer && (
+        <Zoomer
+          imageUrl={image_url}
+          urlParameter={url_parameter}
+          coordinates={selectorPos}
+          zoom={zoomPos}
+        />
+      )}
     </StyledLevelPage>
   );
 }

@@ -10,7 +10,7 @@ function LevelCard({ level }) {
       <h2>{url_parameter}</h2>
       <p>{name}</p>
       <div>
-        <Link to={`/levels/${url_parameter}`}>
+        <Link to={`/levels/${url_parameter}`} state={level}>
           <img
             src={image_url}
             alt={`Image Preview for Level ${url_parameter}`}
