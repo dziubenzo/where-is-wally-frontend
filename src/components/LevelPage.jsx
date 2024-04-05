@@ -1,17 +1,17 @@
-import PropTypes from 'prop-types';
 import { StyledLevelPage } from '../styles/LevelPage.styled';
 import { useEffect, useRef, useState } from 'react';
 import {
   getCoordinates,
   getSelectorPosition,
-  getSelectorSize,
+  getCircleSize,
   checkImageClick,
 } from '../helpers';
 import Selector from './Selector';
 import Zoomer from './Zoomer';
 import { useLocation } from 'react-router-dom';
+import CharacterMarker from './CharacterMarker';
 
-function LevelPage(props) {
+function LevelPage() {
   // Get level from Link prop
   const { state } = useLocation();
   const { url_parameter, name, image_url, characters } = state;
@@ -41,9 +41,9 @@ function LevelPage(props) {
   useEffect(() => {
     function handleResize() {
       setShowSelector(false);
-      setSelectorSize(getSelectorSize(imageRef));
+      setSelectorSize(getCircleSize(imageRef));
     }
-    setSelectorSize(getSelectorSize(imageRef));
+    setSelectorSize(getCircleSize(imageRef));
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -121,10 +121,18 @@ function LevelPage(props) {
           zoom={zoomPos}
         />
       )}
+      {characters.map((character) => {
+        return (
+          <CharacterMarker
+            charactersToFind={charactersToFind}
+            key={character.name}
+            character={character}
+            imageRef={imageRef}
+          />
+        );
+      })}
     </StyledLevelPage>
   );
 }
-
-LevelPage.propTypes = {};
 
 export default LevelPage;

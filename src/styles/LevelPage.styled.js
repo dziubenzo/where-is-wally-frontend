@@ -29,6 +29,22 @@ export const StyledSelector = styled.div.attrs((props) => ({
   height: ${(props) => props.size}px;
   border: 3px dashed ${(props) => props.theme.colours.primary};
   pointer-events: none;
+  z-index: 1;
+`;
+
+export const StyledCharacterMarker = styled.div.attrs((props) => ({
+  style: {
+    top: `${props.position.pixelY}px`,
+    left: `${props.position.pixelX}px`,
+  },
+}))`
+  position: absolute;
+  background: transparent;
+  border-radius: 50%;
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
+  border: 3px solid green;
+  pointer-events: none;
 `;
 
 export const StyledMenu = styled.div.attrs((props) => ({
@@ -43,6 +59,7 @@ export const StyledMenu = styled.div.attrs((props) => ({
   justify-content: center;
   gap: 16px;
   background-color: transparent;
+  z-index: 1;
 `;
 
 export const StyledSelectorButton = styled.button`
@@ -90,6 +107,7 @@ export const StyledZoomer = styled.div.attrs((props) => ({
   outline: 2px solid ${(props) => props.theme.colours.primary};
   border-radius: 32px;
   pointer-events: none;
+  z-index: 1;
 
   @media (width <= ${(props) => props.theme.mobile}) {
     display: none !important;

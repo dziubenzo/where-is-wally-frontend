@@ -19,23 +19,24 @@ export function getCoordinates(imageRef, event, precise = false) {
 // Center selector on click target
 export function getSelectorPosition(imageRef, event) {
   const x = Math.round(
-    event.clientX + window.scrollX - getSelectorSize(imageRef) / 2,
+    event.clientX + window.scrollX - getCircleSize(imageRef) / 2,
   );
   const y = Math.round(
-    event.clientY + window.scrollY - getSelectorSize(imageRef) / 2,
+    event.clientY + window.scrollY - getCircleSize(imageRef) / 2,
   );
   return { x, y };
 }
 
-// Calculate selector size based on image height
-export function getSelectorSize(imageRef) {
-  const PERCENT_OF_IMAGE_HEIGHT = 5;
+// Calculate selector/character marker size based on image height
+// Use default value for selector
+export function getCircleSize(imageRef, percent = 5) {
+  const PERCENT_OF_IMAGE_HEIGHT = percent;
   const { height } = imageRef.current.getBoundingClientRect();
   return Math.round((height * PERCENT_OF_IMAGE_HEIGHT) / 100);
 }
 
 // Check if image click is character click
-// Return character name or false otherwise
+// Return character name or empty string otherwise
 export function checkImageClick(clickX, clickY, characters) {
   const ERROR_THRESHOLD_PERCENT = 1;
 
@@ -74,3 +75,16 @@ export const characterImages = {
   odlaw:
     'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321197/where-is-wally/jcrmujs7eunawcwcmuk4.png',
 };
+
+// Convert character's percent coordinates into pixels taking into account image size, its location from the top and left of viewport and scroll
+// Centre the resulting circle on the character
+export function getCharacterMarkerPos(characterX, characterY, imageRef) {
+  const { width, height, left, top } = imageRef.current.getBoundingClientRect();
+  const pixelX =
+    Math.round((characterX * width) / 100) +
+    Math.round(left + window.scrollX - getCircleSize(imageRef, 10) / 2);
+  const pixelY =
+    Math.round((characterY * height) / 100) +
+    Math.round(top + window.scrollY - getCircleSize(imageRef, 10) / 2);
+  return { pixelX, pixelY };
+}
