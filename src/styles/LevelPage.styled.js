@@ -4,7 +4,7 @@ export const StyledLevelPage = styled.main`
   display: flex;
   flex-direction: column;
 
-  div {
+  div:first-child {
     display: flex;
     justify-content: space-around;
   }
@@ -34,27 +34,45 @@ export const StyledSelector = styled.div.attrs((props) => ({
 export const StyledMenu = styled.div.attrs((props) => ({
   style: {
     top: `${props.coordinates.y + 40}px`,
-    left: `${props.coordinates.x - 110}px`,
+    left: `${props.coordinates.x - 185}px`,
   },
 }))`
   position: absolute;
-  width: 250px;
-  height: 80px;
+  width: 400px;
   display: flex;
+  justify-content: center;
   gap: 16px;
   background-color: transparent;
 `;
 
 export const MenuButton = styled.button`
-  width: 100%;
+  width: 100px;
+  height: 150px;
   border: none;
   border-radius: 16px;
   background-color: ${(props) => props.theme.colours.primary};
   color: ${(props) => props.theme.colours.background};
-  cursor: pointer;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+  }
 
   &:focus-visible {
     outline: 3px solid ${(props) => props.theme.colours.background};
+  }
+
+  @media (hover: hover) {
+    img {
+      transform-origin: 50% 0%;
+      transition: transform 0.5s ease-in;
+
+      &:hover {
+        transform: scale(1.5);
+      }
+    }
   }
 `;
 
