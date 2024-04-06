@@ -64,17 +64,30 @@ export class ApiError extends Error {
   }
 }
 
-// URLs of character button images
-export const characterImages = {
-  wally:
-    'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321197/where-is-wally/ic8mirwy2sevpresfwjf.png',
-  wenda:
-    'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321197/where-is-wally/xfa7vlvbt5yeaelsthvw.png',
-  wizard:
-    'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321422/where-is-wally/xaj4haqv5ffosok8yr7o.png',
-  odlaw:
-    'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321197/where-is-wally/jcrmujs7eunawcwcmuk4.png',
-};
+// URLs of character button images and alt text
+export const characterButtonsData = [
+  {
+    imageURL:
+      'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321197/where-is-wally/ic8mirwy2sevpresfwjf.png',
+    alt: 'Wally',
+  },
+
+  {
+    imageURL:
+      'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321197/where-is-wally/xfa7vlvbt5yeaelsthvw.png',
+    alt: 'Wenda',
+  },
+  {
+    imageURL:
+      'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321422/where-is-wally/xaj4haqv5ffosok8yr7o.png',
+    alt: 'Wizard Whitebeard',
+  },
+  {
+    imageURL:
+      'https://res.cloudinary.com/dvhkp9wc6/image/upload/v1712321197/where-is-wally/jcrmujs7eunawcwcmuk4.png',
+    alt: 'Odlaw',
+  },
+];
 
 // Convert character's percent coordinates into pixels taking into account image size, its location from the top and left of viewport and scroll
 // Centre the resulting circle on the character

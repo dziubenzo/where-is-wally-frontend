@@ -3,16 +3,26 @@ import { StyledSelectorButton } from '../styles/LevelPage.styled';
 import { useState } from 'react';
 StyledSelectorButton;
 
-function SelectorButton({ characterImageUrl, alt, checkGuess }) {
+function SelectorButton({ charactersToFind, imageURL, alt, checkGuess }) {
   // State for giving user feedback on button click
   const [goodGuess, setGoodGuess] = useState(false);
   const [badGuess, setBadGuess] = useState(false);
+
+  // Get character name from alt
+  const characterName = alt.split(' ')[0].toLowerCase();
+
+  // Manipulate background colour of button depending on guess
+  const changeBackground = goodGuess
+    ? { backgroundColor: '#22e215' }
+    : badGuess
+      ? { backgroundColor: '#FF0000' }
+      : undefined;
 
   // Check the guess
   // Change background for a short while if guess incorrect
   // Change background permanently if guess correct
   function handleButtonClick() {
-    const isBadGuess = checkGuess(alt.split(' ')[0].toLowerCase());
+    const isBadGuess = checkGuess(characterName);
     if (isBadGuess) {
       setBadGuess(true);
       setTimeout(() => {
@@ -23,22 +33,23 @@ function SelectorButton({ characterImageUrl, alt, checkGuess }) {
     }
   }
 
-  // Manipulate background colour of button depending on guess
-  const changeBackground = goodGuess
-    ? { backgroundColor: '#22e215' }
-    : badGuess
-      ? { backgroundColor: '#FF0000' }
-      : undefined;
-
   return (
-    <StyledSelectorButton style={changeBackground} onClick={handleButtonClick}>
-      <img src={characterImageUrl} alt={alt} />
-    </StyledSelectorButton>
+    <>
+      {charactersToFind.includes(characterName) && (
+        <StyledSelectorButton
+          style={changeBackground}
+          onClick={handleButtonClick}
+        >
+          <img src={imageURL} alt={alt} />
+        </StyledSelectorButton>
+      )}
+    </>
   );
 }
 
 SelectorButton.propTypes = {
-  characterImageUrl: PropTypes.string,
+  charactersToFind: PropTypes.array,
+  imageURL: PropTypes.string,
   alt: PropTypes.string,
   checkGuess: PropTypes.func,
 };

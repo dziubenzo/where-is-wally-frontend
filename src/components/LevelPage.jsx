@@ -121,11 +121,11 @@ function LevelPage() {
           zoom={zoomPos}
         />
       )}
-      {characters.map((character) => {
+      {characters.map((character, index) => {
         return (
           <CharacterMarker
+            key={index}
             charactersToFind={charactersToFind}
-            key={character.name}
             character={character}
             imageRef={imageRef}
           />

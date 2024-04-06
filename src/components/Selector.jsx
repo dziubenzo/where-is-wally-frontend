@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { StyledSelector, StyledMenu } from '../styles/LevelPage.styled';
 import SelectorButton from './SelectorButton';
-import { characterImages } from '../helpers';
+import { characterButtonsData } from '../helpers';
 
 function Selector({
   coordinates,
@@ -28,34 +28,17 @@ function Selector({
     <>
       <StyledSelector coordinates={coordinates} size={size}></StyledSelector>
       <StyledMenu coordinates={coordinates}>
-        {charactersToFind.includes('wally') && (
-          <SelectorButton
-            characterImageUrl={characterImages.wally}
-            alt="Wally"
-            checkGuess={checkGuess}
-          ></SelectorButton>
-        )}
-        {charactersToFind.includes('wenda') && (
-          <SelectorButton
-            characterImageUrl={characterImages.wenda}
-            alt="Wenda"
-            checkGuess={checkGuess}
-          ></SelectorButton>
-        )}
-        {charactersToFind.includes('wizard') && (
-          <SelectorButton
-            characterImageUrl={characterImages.wizard}
-            alt="Wizard Whitebeard"
-            checkGuess={checkGuess}
-          ></SelectorButton>
-        )}
-        {charactersToFind.includes('odlaw') && (
-          <SelectorButton
-            characterImageUrl={characterImages.odlaw}
-            alt="Odlaw"
-            checkGuess={checkGuess}
-          ></SelectorButton>
-        )}
+        {characterButtonsData.map((character, index) => {
+          return (
+            <SelectorButton
+              key={index}
+              charactersToFind={charactersToFind}
+              imageURL={character.imageURL}
+              alt={character.alt}
+              checkGuess={checkGuess}
+            ></SelectorButton>
+          );
+        })}
       </StyledMenu>
     </>
   );
