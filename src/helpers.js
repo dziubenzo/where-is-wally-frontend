@@ -102,3 +102,27 @@ export function getCharacterMarkerPos(characterX, characterY, imageRef) {
     Math.round(top + window.scrollY - getCircleSize(imageRef, 10) / 2);
   return { pixelX, pixelY };
 }
+
+// Calculate hint marker size based on image height and width
+export function getHintSize(imageRef) {
+  const PERCENT_OF_IMAGE_HEIGHT = 33;
+  const PERCENT_OF_IMAGE_WIDTH = 33;
+  const { width, height } = imageRef.current.getBoundingClientRect();
+  const hintWidth = Math.round((width * PERCENT_OF_IMAGE_WIDTH) / 100);
+  const hintHeight = Math.round((height * PERCENT_OF_IMAGE_HEIGHT) / 100);
+  return { sizeX: hintWidth, sizeY: hintHeight };
+}
+
+// Convert character's percent coordinates into pixels taking into account image size, its location from the top and left of viewport and scroll
+// Centre the resulting rectangle on the character
+export function getHintMarkerPos(characterX, characterY, imageRef) {
+  const { width, height, left, top } = imageRef.current.getBoundingClientRect();
+  const { sizeX, sizeY } = getHintSize(imageRef);
+  const pixelX =
+    Math.round((characterX * width) / 100) +
+    Math.round(left + window.scrollX - sizeX / 2);
+  const pixelY =
+    Math.round((characterY * height) / 100) +
+    Math.round(top + window.scrollY - sizeY / 2);
+  return { pixelX, pixelY };
+}

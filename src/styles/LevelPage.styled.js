@@ -47,6 +47,20 @@ export const StyledCharacterMarker = styled.div.attrs((props) => ({
   pointer-events: none;
 `;
 
+export const StyledHintMarker = styled.div.attrs((props) => ({
+  style: {
+    top: `${props.position.pixelY}px`,
+    left: `${props.position.pixelX}px`,
+  },
+}))`
+  position: absolute;
+  background: transparent;
+  width: ${(props) => props.size.sizeX}px;
+  height: ${(props) => props.size.sizeY}px;
+  border: 3px solid red;
+  pointer-events: none;
+`;
+
 export const StyledMenu = styled.div.attrs((props) => ({
   style: {
     top: `${props.coordinates.y + 40}px`,

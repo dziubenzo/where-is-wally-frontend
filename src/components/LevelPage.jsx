@@ -10,6 +10,7 @@ import Selector from './Selector';
 import Zoomer from './Zoomer';
 import { useLocation } from 'react-router-dom';
 import CharacterMarker from './CharacterMarker';
+import HintMarker from './HintMarker';
 
 function LevelPage() {
   // Get level from Link prop
@@ -129,6 +130,11 @@ function LevelPage() {
             character={character}
             imageRef={imageRef}
           />
+        );
+      })}
+      {characters.map((character, index) => {
+        return (
+          <HintMarker key={index} character={character} imageRef={imageRef} />
         );
       })}
     </StyledLevelPage>
