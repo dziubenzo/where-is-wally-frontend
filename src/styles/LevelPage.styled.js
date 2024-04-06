@@ -3,16 +3,61 @@ import styled from 'styled-components';
 export const StyledLevelPage = styled.main`
   display: flex;
   flex-direction: column;
+  gap: 16px;
 
-  div:first-child {
-    display: flex;
-    justify-content: space-around;
+  .game-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    text-align: center;
+
+    button {
+      width: 125px;
+      padding: 0.5em;
+      border-radius: 16px;
+      font-size: ${(props) => props.theme.fontSizes.standard};
+      background-color: ${(props) => props.theme.colours.background};
+      color: ${(props) => props.theme.colours.primary};
+      outline: 2px solid ${(props) => props.theme.colours.primary};
+      border: none;
+      cursor: pointer;
+
+      &:focus-visible {
+        outline: 4px solid ${(props) => props.theme.colours.primary};
+      }
+    }
+
+    span {
+      font-weight: 600;
+      font-size: ${(props) => props.theme.fontSizes.medium};
+    }
   }
 
   img {
     width: 100%;
     border-radius: 8px;
     cursor: crosshair;
+  }
+
+  @media (hover: hover) {
+    .game-info {
+      button:hover {
+        background-color: ${(props) => props.theme.colours.primary};
+        color: ${(props) => props.theme.colours.background};
+      }
+    }
+  }
+
+  @media (width <= ${(props) => props.theme.mobile}) {
+    .game-info {
+      p {
+        font-size: ${(props) => props.theme.fontSizes.small};
+      }
+
+      button {
+        width: revert;
+      }
+    }
   }
 `;
 

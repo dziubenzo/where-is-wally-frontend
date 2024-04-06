@@ -15,7 +15,7 @@ import HintMarker from './HintMarker';
 function LevelPage() {
   // Get level from Link prop
   const { state } = useLocation();
-  const { url_parameter, name, image_url, characters } = state;
+  const { url_parameter, image_url, characters } = state;
 
   const imageRef = useRef(null);
 
@@ -36,6 +36,10 @@ function LevelPage() {
     'odlaw',
   ]);
   const [currentClick, setCurrentClick] = useState(false);
+
+  // Hints states
+  const [showHints, setShowHints] = useState(false);
+  const [hintsUsed, setHintsUsed] = useState(false);
 
   // Calculate selector size upon component render
   // Hide selector and calculate its size whenever browser is resized
@@ -86,15 +90,27 @@ function LevelPage() {
     setShowSelector(false);
   }
 
+  function handleHintButtonClick() {
+    setShowHints(!showHints);
+    setHintsUsed(true);
+  }
+
   return (
     <StyledLevelPage>
-      <div>
-        <p>Level: {name}</p>
-        <p>
-          Characters Found: {characters.length - charactersToFind.length}/
-          {characters.length}
-        </p>
-        <p>Time: TODO</p>
+      <div className="game-info">
+        <div>
+          <p>Characters Found:</p>
+          <span>
+            {characters.length - charactersToFind.length}/{characters.length}
+          </span>
+        </div>
+        <button onClick={handleHintButtonClick}>
+          {showHints ? 'Hide' : 'Show'} Hints
+        </button>
+        <div>
+          <p>Time:</p>
+          <span>TODO</span>
+        </div>
       </div>
       <img
         ref={imageRef}
@@ -134,7 +150,12 @@ function LevelPage() {
       })}
       {characters.map((character, index) => {
         return (
-          <HintMarker key={index} character={character} imageRef={imageRef} />
+          <HintMarker
+            key={index}
+            character={character}
+            imageRef={imageRef}
+            showHints={showHints}
+          />
         );
       })}
     </StyledLevelPage>

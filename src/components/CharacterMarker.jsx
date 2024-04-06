@@ -34,7 +34,7 @@ function CharacterMarker({ charactersToFind, character, imageRef }) {
 
   return (
     <>
-      {charactersToFind.includes(name) && (
+      {!charactersToFind.includes(name) && (
         <StyledCharacterMarker position={pixelCoordinates} size={markerSize} />
       )}
     </>

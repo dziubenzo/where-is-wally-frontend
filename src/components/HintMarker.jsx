@@ -3,7 +3,7 @@ import { StyledHintMarker } from '../styles/LevelPage.styled';
 import { useState, useEffect } from 'react';
 import { getHintSize, getHintMarkerPos } from '../helpers';
 
-function HintMarker({ character, imageRef }) {
+function HintMarker({ character, imageRef, showHints }) {
   const { x, y } = character;
 
   // States for pixel coordinates and size of character marker
@@ -27,17 +27,23 @@ function HintMarker({ character, imageRef }) {
       window.removeEventListener('resize', handleResize);
     };
   }, [x, y, imageRef]);
+
   return (
-    <StyledHintMarker
-      position={pixelCoordinates}
-      size={markerSize}
-    ></StyledHintMarker>
+    <>
+      {showHints && (
+        <StyledHintMarker
+          position={pixelCoordinates}
+          size={markerSize}
+        ></StyledHintMarker>
+      )}
+    </>
   );
 }
 
 HintMarker.propTypes = {
   character: PropTypes.object,
   imageRef: PropTypes.object,
+  showHints: PropTypes.boolean,
 };
 
 export default HintMarker;

@@ -16,6 +16,7 @@ const darkTheme = {
   },
   fontSizes: {
     small: '0.8rem',
+    standard: '1rem',
     medium: '1.2rem',
     large: '1.5rem',
     extraLarge: '2rem',
