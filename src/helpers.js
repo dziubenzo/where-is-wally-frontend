@@ -38,14 +38,15 @@ export function getCircleSize(imageRef, percent = 5) {
 // Check if image click is character click
 // Return character name or empty string otherwise
 export function checkImageClick(clickX, clickY, characters) {
-  const ERROR_THRESHOLD_PERCENT = 1;
+  const ERROR_THRESHOLD_PERCENT_X = 1;
+  const ERROR_THRESHOLD_PERCENT_Y = 2;
 
   for (const character of characters) {
     // Set thresholds
-    const lowThresholdX = character.x - ERROR_THRESHOLD_PERCENT;
-    const highThresholdX = character.x + ERROR_THRESHOLD_PERCENT;
-    const lowThresholdY = character.y - ERROR_THRESHOLD_PERCENT;
-    const highThresholdY = character.y + ERROR_THRESHOLD_PERCENT;
+    const lowThresholdX = character.x - ERROR_THRESHOLD_PERCENT_X;
+    const highThresholdX = character.x + ERROR_THRESHOLD_PERCENT_X;
+    const lowThresholdY = character.y - ERROR_THRESHOLD_PERCENT_Y;
+    const highThresholdY = character.y + ERROR_THRESHOLD_PERCENT_Y;
 
     if (clickX >= lowThresholdX && clickX <= highThresholdX) {
       if (clickY >= lowThresholdY && clickY <= highThresholdY) {
