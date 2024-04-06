@@ -12,6 +12,7 @@ import Zoomer from './Zoomer';
 import { useLocation } from 'react-router-dom';
 import CharacterMarker from './CharacterMarker';
 import HintMarker from './HintMarker';
+import GameOverModal from './GameOverModal';
 
 function LevelPage() {
   // Get level from Link prop
@@ -169,6 +170,7 @@ function LevelPage() {
           />
         );
       })}
+      <GameOverModal />
     </StyledLevelPage>
   );
 }

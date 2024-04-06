@@ -44,6 +44,7 @@ export const StyledLevelPage = styled.main`
   @media (hover: hover) {
     .game-info {
       button:hover {
+        outline: none;
         background-color: ${(props) => props.theme.colours.primary};
         color: ${(props) => props.theme.colours.background};
       }
@@ -183,4 +184,83 @@ export const MagnifiedImage = styled.img.attrs((props) => ({
   transform: scale(10);
   filter: contrast(130%);
   padding: 0.65em; // This ensures that the transform-origin-based zooming works well everywhere for the scale of 10 by ensuring that the centre of the zoom is always where the cursor points
+`;
+
+export const StyledGameOverModal = styled.dialog`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  aspect-ratio: 1 / 1;
+  border: none;
+  outline: 4px solid ${(props) => props.theme.colours.primary};
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 8px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+
+    label {
+      cursor: pointer;
+    }
+
+    input {
+      font-size: ${(props) => props.theme.fontSizes.standard};
+      width: 20ch;
+      padding: 0.5em;
+      border: none;
+      outline: 2px solid ${(props) => props.theme.colours.primary};
+      border-radius: 8px;
+      text-align: center;
+
+      &:focus-visible {
+        outline: 3px solid ${(props) => props.theme.colours.primary};
+      }
+    }
+  }
+
+  p {
+    font-size: ${(props) => props.theme.fontSizes.medium};
+  }
+
+  span {
+    font-size: ${(props) => props.theme.fontSizes.large};
+    font-weight: 600;
+    letter-spacing: 2px;
+    background-color: ${(props) => props.theme.colours.primary};
+    color: ${(props) => props.theme.colours.background};
+    padding: 1.25em 0.75em;
+    border-radius: 50%;
+  }
+
+  button {
+    max-width: 200px;
+    padding: 0.5em;
+    border-radius: 16px;
+    font-size: ${(props) => props.theme.fontSizes.medium};
+    background-color: ${(props) => props.theme.colours.primary};
+    color: ${(props) => props.theme.colours.background};
+    border: none;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 3px solid white;
+    }
+  }
+
+  &::backdrop {
+    backdrop-filter: blur(2px);
+  }
+
+  @media (width <= ${(props) => props.theme.mobile}) {
+    width: 95%;
+  }
 `;
