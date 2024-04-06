@@ -36,6 +36,7 @@ function LevelPage() {
     'odlaw',
   ]);
   const [currentClick, setCurrentClick] = useState(false);
+  const [timer, setTimer] = useState(0);
 
   // Hints states
   const [showHints, setShowHints] = useState(false);
@@ -54,6 +55,13 @@ function LevelPage() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  // Update timer every 10 ms
+  useEffect(() => {
+    setTimeout(() => {
+      setTimer(timer + 0.01);
+    }, 10);
+  }, [timer]);
 
   function handleImageClick(event) {
     // Hide zoomer
@@ -109,7 +117,7 @@ function LevelPage() {
         </button>
         <div>
           <p>Time:</p>
-          <span>TODO</span>
+          <span>{timer.toFixed(2)}</span>
         </div>
       </div>
       <img

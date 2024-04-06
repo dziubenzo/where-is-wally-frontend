@@ -30,6 +30,8 @@ export const StyledLevelPage = styled.main`
     span {
       font-weight: 600;
       font-size: ${(props) => props.theme.fontSizes.medium};
+      letter-spacing: 1px;
+      font-family: 'Reddit Mono', monospace;
     }
   }
 
