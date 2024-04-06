@@ -3,8 +3,14 @@ import { StyledHintMarker } from '../styles/LevelPage.styled';
 import { useState, useEffect } from 'react';
 import { getHintSize, getHintMarkerPos } from '../helpers';
 
-function HintMarker({ character, imageRef, showHints }) {
-  const { x, y } = character;
+function HintMarker({
+  character,
+  imageRef,
+  showHints,
+  hintColour,
+  charactersToFind,
+}) {
+  const { x, y, name } = character;
 
   // States for pixel coordinates and size of character marker
   const [pixelCoordinates, setPixelCoordinates] = useState({
@@ -30,10 +36,11 @@ function HintMarker({ character, imageRef, showHints }) {
 
   return (
     <>
-      {showHints && (
+      {showHints && charactersToFind.includes(name) && (
         <StyledHintMarker
           position={pixelCoordinates}
           size={markerSize}
+          hintcolour={hintColour}
         ></StyledHintMarker>
       )}
     </>
@@ -44,6 +51,8 @@ HintMarker.propTypes = {
   character: PropTypes.object,
   imageRef: PropTypes.object,
   showHints: PropTypes.bool,
+  hintColour: PropTypes.string,
+  charactersToFind: PropTypes.array,
 };
 
 export default HintMarker;

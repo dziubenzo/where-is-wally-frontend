@@ -5,7 +5,7 @@ import {
   getSelectorPosition,
   getCircleSize,
   checkImageClick,
-  getRandomInteger,
+  characterButtonsData,
 } from '../helpers';
 import Selector from './Selector';
 import Zoomer from './Zoomer';
@@ -164,6 +164,8 @@ function LevelPage() {
             character={character}
             imageRef={imageRef}
             showHints={showHints}
+            hintcolour={characterButtonsData[index].hintColour}
+            charactersToFind={charactersToFind}
           />
         );
       })}
