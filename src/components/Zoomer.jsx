@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { StyledZoomer, MagnifiedImage } from '../styles/LevelPage.styled';
 
 function Zoomer({ imageUrl, url_parameter, coordinates, zoom }) {
-  // console.log(Math.round(zoom.percentX), Math.round(zoom.percentY));
   return (
     <StyledZoomer coordinates={coordinates}>
       <MagnifiedImage

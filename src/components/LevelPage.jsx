@@ -5,6 +5,7 @@ import {
   getSelectorPosition,
   getCircleSize,
   checkImageClick,
+  getRandomInteger,
 } from '../helpers';
 import Selector from './Selector';
 import Zoomer from './Zoomer';

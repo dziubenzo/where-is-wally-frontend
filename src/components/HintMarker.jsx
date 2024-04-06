@@ -43,7 +43,7 @@ function HintMarker({ character, imageRef, showHints }) {
 HintMarker.propTypes = {
   character: PropTypes.object,
   imageRef: PropTypes.object,
-  showHints: PropTypes.boolean,
+  showHints: PropTypes.bool,
 };
 
 export default HintMarker;

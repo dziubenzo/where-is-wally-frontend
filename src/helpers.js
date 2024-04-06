@@ -114,15 +114,32 @@ export function getHintSize(imageRef) {
 }
 
 // Convert character's percent coordinates into pixels taking into account image size, its location from the top and left of viewport and scroll
-// Centre the resulting rectangle on the character
 export function getHintMarkerPos(characterX, characterY, imageRef) {
   const { width, height, left, top } = imageRef.current.getBoundingClientRect();
   const { sizeX, sizeY } = getHintSize(imageRef);
+  const { shiftX, shiftY } = getShifts(imageRef);
   const pixelX =
-    Math.round((characterX * width) / 100) +
+    Math.round((characterX * width) / 100 + shiftX) +
     Math.round(left + window.scrollX - sizeX / 2);
   const pixelY =
-    Math.round((characterY * height) / 100) +
+    Math.round((characterY * height) / 100 + shiftY) +
     Math.round(top + window.scrollY - sizeY / 2);
   return { pixelX, pixelY };
+}
+
+// Generate a random integer between -number and number
+export function getRandomInteger(integer) {
+  const min = integer - integer * 2;
+  const max = integer;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Generate random shifts of the max value of SHIFT_PERCENT (25% seems OK) of the hint marker width/height in both x and y directions
+// With no shifts, the character would always in the centre of the hint marker
+export function getShifts(imageRef) {
+  const SHIFT_PERCENT = 25;
+  const { sizeX, sizeY } = getHintSize(imageRef);
+  const shiftX = getRandomInteger((sizeX * SHIFT_PERCENT) / 100);
+  const shiftY = getRandomInteger((sizeY * SHIFT_PERCENT) / 100);
+  return { shiftX, shiftY };
 }
