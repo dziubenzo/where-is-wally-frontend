@@ -13,7 +13,7 @@ export const StyledLeaderboardPage = styled.main`
 `;
 
 export const LevelButton = styled.button`
-  max-width: 125px;
+  max-width: 175px;
   padding: 0.5em 1em;
   font-size: ${(props) => props.theme.fontSizes.medium};
   background-color: ${(props) => props.theme.colours.background};
@@ -22,6 +22,16 @@ export const LevelButton = styled.button`
   border: none;
   outline: 2px solid ${(props) => props.theme.colours.primary};
   cursor: pointer;
+
+  &.selected {
+    background-color: ${(props) => props.theme.colours.primary};
+    color: ${(props) => props.theme.colours.background};
+    outline: none;
+
+    &:focus-visible {
+      outline: 3px solid white;
+    }
+  }
 
   @media (hover: hover) {
     &:hover {
@@ -32,8 +42,9 @@ export const LevelButton = styled.button`
   }
 
   @media (width <= ${(props) => props.theme.mobile}) {
-    max-width: 75px;
+    max-width: 125px;
     font-size: 1rem;
+    padding: 0.5em;
   }
 `;
 

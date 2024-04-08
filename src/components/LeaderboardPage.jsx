@@ -1,53 +1,120 @@
-import PropTypes from 'prop-types';
 import {
   StyledLeaderboardPage,
   LevelButton,
   StyledLeaderboardTable,
 } from '../styles/LeaderboardPage.styled';
+import { useLoaderData } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { format } from 'date-fns';
 
-function LeaderboardPage(props) {
+function LeaderboardPage() {
+  const { levels, players } = useLoaderData();
+
+  // State for changing heading
+  const [heading, setHeading] = useState('All');
+  // State for highlighting currently pressed filter button
+  const [pressedButton, setPressedButton] = useState(
+    new Array(levels.length + 1).fill(null),
+  );
+  // State for displaying table data
+  const [tableData, setTableData] = useState(players);
+
+  function handleLevelButtonClick(levelId) {
+    const [currentLevel] = levels.filter((level) => level._id === levelId);
+    setHeading(`Level ${currentLevel.url_parameter} - ${currentLevel.name}`);
+    setPressedButton(
+      pressedButton.map((button, index) => {
+        if (index === currentLevel.url_parameter) {
+          return (button = true);
+        } else {
+          return (button = null);
+        }
+      }),
+    );
+    setTableData(players.filter((player) => player.level._id === levelId));
+  }
+
+  function handleAllButtonClick() {
+    setHeading('All');
+    setPressedButton(
+      pressedButton.map((button, index) => {
+        if (index === 0) {
+          return (button = true);
+        } else {
+          return (button = null);
+        }
+      }),
+    );
+    setTableData(players);
+  }
+
+  // Mark the All button as pressed upon component render
+  useEffect(() => {
+    setPressedButton(
+      pressedButton.map((button, index) => {
+        if (index === 0) {
+          return (button = true);
+        } else {
+          return (button = null);
+        }
+      }),
+    );
+  }, []);
+
   return (
     <StyledLeaderboardPage>
       <div className="level-buttons">
-        <LevelButton>Level 1</LevelButton>
-        <LevelButton>Level 2</LevelButton>
-        <LevelButton>Level 3</LevelButton>
+        <>
+          <LevelButton
+            className={pressedButton[0] ? 'selected' : undefined}
+            onClick={handleAllButtonClick}
+          >
+            All
+          </LevelButton>
+          {levels.map((level) => {
+            return (
+              <LevelButton
+                key={level.url_parameter}
+                className={
+                  pressedButton[level.url_parameter] ? 'selected' : undefined
+                }
+                onClick={() => handleLevelButtonClick(level._id)}
+              >
+                Level {level.url_parameter}
+              </LevelButton>
+            );
+          })}
+        </>
       </div>
-      <h2>Level 1</h2>
+      <h2>{heading}</h2>
       <StyledLeaderboardTable>
-        <tr>
-          <th>Position</th>
-          <th>Nickname</th>
-          <th>Time</th>
-          <th>Date</th>
-          <th>Hint Used?</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>ME</td>
-          <td>3.33 s</td>
-          <td>26/05/1945</td>
-          <td>No</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>YOU</td>
-          <td>35.33 s</td>
-          <td>26/05/1945</td>
-          <td>Yes</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>KHALEESI</td>
-          <td>1823.33 s</td>
-          <td>26/05/1945</td>
-          <td>No</td>
-        </tr>
+        <thead>
+          <tr>
+            <th>Pos.</th>
+            <th>Nickname</th>
+            <th>Level</th>
+            <th>Time</th>
+            <th>Date</th>
+            <th>Hints?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableData.map((player, index) => {
+            return (
+              <tr key={player._id}>
+                <td>{index + 1}</td>
+                <td>{player.nickname}</td>
+                <td>{player.level.name}</td>
+                <td>{player.duration.toFixed(2)} s</td>
+                <td>{format(player.end_date, 'dd/MM/yy')}</td>
+                <td>{player.hints_used ? 'Yes' : 'No'}</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </StyledLeaderboardTable>
     </StyledLeaderboardPage>
   );
 }
-
-LeaderboardPage.propTypes = {};
 
 export default LeaderboardPage;
