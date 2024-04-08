@@ -105,7 +105,7 @@ export const StyledHintMarker = styled.div.attrs((props) => ({
   background: transparent;
   width: ${(props) => props.size.sizeX}px;
   height: ${(props) => props.size.sizeY}px;
-  border: 3px solid ${(props) => props.hintColour};
+  border: 3px solid ${(props) => props.hintcolour};
   pointer-events: none;
 `;
 

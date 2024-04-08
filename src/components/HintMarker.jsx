@@ -7,7 +7,7 @@ function HintMarker({
   character,
   imageRef,
   showHints,
-  hintColour,
+  hintcolour,
   charactersToFind,
 }) {
   const { x, y, name } = character;
@@ -40,7 +40,7 @@ function HintMarker({
         <StyledHintMarker
           position={pixelCoordinates}
           size={markerSize}
-          hintcolour={hintColour}
+          hintcolour={hintcolour}
         ></StyledHintMarker>
       )}
     </>
