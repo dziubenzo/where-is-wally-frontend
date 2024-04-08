@@ -102,9 +102,16 @@ function LevelPage() {
     setShowZoomer(false);
   }
 
-  function handleImageEnter() {
-    setShowZoomer(true);
-    setShowSelector(false);
+  function handleImageEnter(event) {
+    // Hide selector only when img is entered from the "outside", i.e. not when you enter img from selector buttons
+    if (
+      event.relatedTarget instanceof Window ||
+      event.relatedTarget.className === 'game-info' ||
+      event.relatedTarget.localName === 'main'
+    ) {
+      setShowZoomer(true);
+      setShowSelector(false);
+    }
   }
 
   function handleHintButtonClick() {
@@ -145,6 +152,8 @@ function LevelPage() {
           currentClick={currentClick}
           charactersToFind={charactersToFind}
           setCharactersToFind={setCharactersToFind}
+          setShowSelector={setShowSelector}
+          setShowZoomer={setShowZoomer}
         />
       )}
       {showZoomer && (

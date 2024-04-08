@@ -187,107 +187,113 @@ export const MagnifiedImage = styled.img.attrs((props) => ({
 `;
 
 export const StyledGameOverModal = styled.dialog`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  aspect-ratio: 1 / 1;
-  border: none;
-  outline: 4px solid ${(props) => props.theme.colours.primary};
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  gap: 8px;
+  display: none;
 
-  form {
+  &[open] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    aspect-ratio: 1 / 1;
+    border: none;
+    outline: 4px solid ${(props) => props.theme.colours.primary};
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
     gap: 8px;
-    text-align: center;
 
-    label {
-      cursor: pointer;
-    }
-
-    input {
-      font-size: ${(props) => props.theme.fontSizes.standard};
-      width: 20ch;
-      padding: 0.5em;
-      border: none;
-      outline: 2px solid ${(props) => props.theme.colours.primary};
-      border-radius: 8px;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       text-align: center;
 
-      &:focus-visible {
-        outline: 3px solid ${(props) => props.theme.colours.primary};
+      label {
+        cursor: pointer;
+      }
+
+      input {
+        font-size: ${(props) => props.theme.fontSizes.standard};
+        width: 20ch;
+        padding: 0.5em;
+        border: none;
+        outline: 2px solid ${(props) => props.theme.colours.primary};
+        border-radius: 8px;
+        text-align: center;
+
+        &:focus-visible {
+          outline: 3px solid ${(props) => props.theme.colours.primary};
+        }
       }
     }
-  }
-
-  p {
-    font-size: ${(props) => props.theme.fontSizes.medium};
-  }
-
-  .result-span {
-    font-size: ${(props) => props.theme.fontSizes.large};
-    font-weight: 600;
-    letter-spacing: 2px;
-    background-color: ${(props) => props.theme.colours.primary};
-    color: ${(props) => props.theme.colours.background};
-    padding: 2em 0.75em;
-    border-radius: 50%;
-  }
-
-  button {
-    max-width: 200px;
-    padding: 0.5em;
-    border-radius: 16px;
-    font-size: ${(props) => props.theme.fontSizes.medium};
-    background-color: ${(props) => props.theme.colours.primary};
-    color: ${(props) => props.theme.colours.background};
-    border: none;
-    cursor: pointer;
-
-    &:focus-visible {
-      outline: 3px solid white;
-    }
-  }
-
-  .record-submitted-btn {
-    max-width: 250px;
-
-    &:focus-visible {
-      outline: none;
-    }
-  }
-
-  span {
-    font-weight: 600;
-  }
-
-  .error-message {
-    text-align: center;
 
     p {
-      font-size: ${(props) => props.theme.fontSizes.standard};
-      color: red;
+      font-size: ${(props) => props.theme.fontSizes.medium};
     }
 
-    a {
-      text-decoration-color: red;
-      text-underline-offset: 0.4em;
+    .result-span {
+      font-size: ${(props) => props.theme.fontSizes.large};
+      font-weight: 600;
+      letter-spacing: 2px;
+      background-color: ${(props) => props.theme.colours.primary};
+      color: ${(props) => props.theme.colours.background};
+      padding: 2em 0.75em;
+      border-radius: 50%;
     }
-  }
 
-  &::backdrop {
-    backdrop-filter: blur(2px);
+    button {
+      max-width: 200px;
+      padding: 0.5em;
+      border-radius: 16px;
+      font-size: ${(props) => props.theme.fontSizes.medium};
+      background-color: ${(props) => props.theme.colours.primary};
+      color: ${(props) => props.theme.colours.background};
+      border: none;
+      cursor: pointer;
+
+      &:focus-visible {
+        outline: 3px solid white;
+      }
+    }
+
+    .record-submitted-btn {
+      max-width: 250px;
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    span {
+      font-weight: 600;
+    }
+
+    .error-message {
+      text-align: center;
+
+      p {
+        font-size: ${(props) => props.theme.fontSizes.standard};
+        color: red;
+      }
+
+      a {
+        text-decoration-color: red;
+        text-underline-offset: 0.4em;
+      }
+    }
+
+    &::backdrop {
+      backdrop-filter: blur(2px);
+    }
   }
 
   @media (width <= ${(props) => props.theme.mobile}) {
-    width: 95%;
-    height: 60%;
+    &[open] {
+      width: calc(100% - 1em);
+      height: 60%;
+    }
   }
 `;

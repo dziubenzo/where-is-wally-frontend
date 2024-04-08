@@ -9,15 +9,20 @@ function Selector({
   currentClick,
   charactersToFind,
   setCharactersToFind,
+  setShowSelector,
+  setShowZoomer,
 }) {
   function checkGuess(buttonCharacter) {
     if (currentClick === buttonCharacter) {
       if (charactersToFind.includes(currentClick)) {
         // Change game state after delay to be able to show good guess button background
+        // Hide selector and show zoomer
         setTimeout(() => {
           setCharactersToFind(
             charactersToFind.filter((character) => character !== currentClick),
           );
+          setShowSelector(false);
+          setShowZoomer(true);
         }, 500);
         return false;
       }
@@ -50,6 +55,8 @@ Selector.propTypes = {
   currentClick: PropTypes.string,
   charactersToFind: PropTypes.array,
   setCharactersToFind: PropTypes.func,
+  setShowSelector: PropTypes.func,
+  setShowZoomer: PropTypes.func,
 };
 
 export default Selector;
