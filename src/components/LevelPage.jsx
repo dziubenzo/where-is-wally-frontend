@@ -17,9 +17,10 @@ import GameOverModal from './GameOverModal';
 function LevelPage() {
   // Get level from Link prop
   const { state } = useLocation();
-  const { url_parameter, image_url, characters } = state;
+  const { _id, url_parameter, image_url, characters } = state;
 
   const imageRef = useRef(null);
+  const startDateRef = useRef(null);
 
   // Selector states
   const [selectorSize, setSelectorSize] = useState(null);
@@ -58,12 +59,18 @@ function LevelPage() {
     };
   }, []);
 
-  // Update timer every 10 ms
+  // Update timer every 10 ms as long as there are characters to find
+  // Set start date
   useEffect(() => {
-    setTimeout(() => {
-      setTimer(timer + 0.01);
-    }, 10);
-  }, [timer]);
+    if (charactersToFind.length) {
+      setTimeout(() => {
+        setTimer(timer + 0.01);
+        if (startDateRef.current === null) {
+          startDateRef.current = Date.now();
+        }
+      }, 10);
+    }
+  }, [charactersToFind, timer]);
 
   function handleImageClick(event) {
     // Hide zoomer
@@ -170,7 +177,14 @@ function LevelPage() {
           />
         );
       })}
-      <GameOverModal />
+      {!charactersToFind.length && (
+        <GameOverModal
+          levelId={_id}
+          startDateRef={startDateRef}
+          timer={timer}
+          hintsUsed={hintsUsed}
+        />
+      )}
     </StyledLevelPage>
   );
 }

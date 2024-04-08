@@ -231,13 +231,13 @@ export const StyledGameOverModal = styled.dialog`
     font-size: ${(props) => props.theme.fontSizes.medium};
   }
 
-  span {
+  .result-span {
     font-size: ${(props) => props.theme.fontSizes.large};
     font-weight: 600;
     letter-spacing: 2px;
     background-color: ${(props) => props.theme.colours.primary};
     color: ${(props) => props.theme.colours.background};
-    padding: 1.25em 0.75em;
+    padding: 2em 0.75em;
     border-radius: 50%;
   }
 
@@ -256,11 +256,38 @@ export const StyledGameOverModal = styled.dialog`
     }
   }
 
+  .record-submitted-btn {
+    max-width: 250px;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  span {
+    font-weight: 600;
+  }
+
+  .error-message {
+    text-align: center;
+
+    p {
+      font-size: ${(props) => props.theme.fontSizes.standard};
+      color: red;
+    }
+
+    a {
+      text-decoration-color: red;
+      text-underline-offset: 0.4em;
+    }
+  }
+
   &::backdrop {
     backdrop-filter: blur(2px);
   }
 
   @media (width <= ${(props) => props.theme.mobile}) {
     width: 95%;
+    height: 60%;
   }
 `;
