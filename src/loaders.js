@@ -47,3 +47,25 @@ export async function levelsPageLoader() {
   const levels = await resLevels.json();
   return levels;
 }
+
+export async function leaderboardPageLoader() {
+  const [resLevels, resPlayers] = await Promise.all([
+    fetch(`${API_URL}/levels`),
+    fetch(`${API_URL}/players`),
+  ]);
+  // Handle errors by triggering ErrorPage render with error status code and status text
+  if (!resLevels.ok) {
+    const error = new ApiError(resLevels.statusText, resLevels.status);
+    throw error;
+  }
+  if (!resPlayers.ok) {
+    const error = new ApiError(resPlayers.statusText, resPlayers.status);
+    throw error;
+  }
+  const [levels, players] = await Promise.all([
+    await resLevels.json(),
+    await resPlayers.json(),
+  ]);
+
+  return { levels, players };
+}
