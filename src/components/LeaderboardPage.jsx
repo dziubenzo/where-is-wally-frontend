@@ -101,11 +101,15 @@ function LeaderboardPage() {
             return (
               <tr key={player._id}>
                 <td>{index + 1}</td>
-                <td>{player.nickname}</td>
-                <td>{player.level.name}</td>
-                <td>{player.duration.toFixed(2)} s</td>
+                <td className="nickname-column">{player.nickname}</td>
+                <td className="level-column">{player.level.name}</td>
+                <td className="time-column">{player.duration.toFixed(2)} s</td>
                 <td>{format(player.end_date, 'dd/MM/yy')}</td>
-                <td>{player.hints_used ? 'Yes' : 'No'}</td>
+                <td
+                  className={player.hints_used ? 'yes-hints-column' : undefined}
+                >
+                  {player.hints_used ? 'Yes' : 'No'}
+                </td>
               </tr>
             );
           })}
