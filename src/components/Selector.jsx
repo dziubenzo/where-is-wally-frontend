@@ -22,7 +22,10 @@ function Selector({
             charactersToFind.filter((character) => character !== currentClick),
           );
           setShowSelector(false);
-          setShowZoomer(true);
+          // Show zoomer as long as there are at least 2 characters to find
+          if (charactersToFind.length !== 1) {
+            setShowZoomer(true);
+          }
         }, 500);
         return false;
       }

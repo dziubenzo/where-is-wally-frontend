@@ -5,8 +5,8 @@ function Header() {
   const { pathname } = useLocation();
   return (
     <StyledHeader
-      levels={pathname === '/levels' ? true : undefined}
-      leaderboard={pathname === '/leaderboard' ? true : undefined}
+      levels={pathname === '/levels' ? "true" : undefined}
+      leaderboard={pathname === '/leaderboard' ? "true" : undefined}
     >
       <Link to="/levels">Levels</Link>
       <Link to="/">
