@@ -157,13 +157,13 @@ export const StyledSelectorButton = styled.button`
 
 export const StyledZoomer = styled.div.attrs((props) => ({
   style: {
-    top: `${props.coordinates.y - 200}px`,
-    left: `${props.coordinates.x - 200}px`,
+    top: `${props.coordinates.y - 300}px`,
+    left: `${props.coordinates.x - 300}px`,
   },
 }))`
   display: flex;
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: 300px;
   position: absolute;
   overflow: hidden;
   outline: 2px solid ${(props) => props.theme.colours.primary};
@@ -181,9 +181,9 @@ export const MagnifiedImage = styled.img.attrs((props) => ({
     transformOrigin: `${props.zoom.percentX}% ${props.zoom.percentY}%`,
   },
 }))`
-  transform: scale(10);
+  transform: scale(7);
   filter: contrast(130%);
-  padding: 0.65em; // This ensures that the transform-origin-based zooming works well everywhere for the scale of 10 by ensuring that the centre of the zoom is always where the cursor points
+  padding: 1.4em; // This ensures that the transform-origin-based zooming works well everywhere for the scale of 7 by ensuring that the centre of the zoom is always where the cursor points
 `;
 
 export const StyledGameOverModal = styled.dialog`
