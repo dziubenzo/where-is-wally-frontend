@@ -259,11 +259,14 @@ export const StyledGameOverModal = styled.dialog`
       }
     }
 
-    .record-submitted-btn {
-      max-width: 250px;
+    .navigation-btns {
+      display: flex;
+      gap: 32px;
 
-      &:focus-visible {
-        outline: none;
+      button {
+        &:focus-visible {
+          outline: none;
+        }
       }
     }
 
@@ -294,6 +297,20 @@ export const StyledGameOverModal = styled.dialog`
     &[open] {
       width: calc(100% - 1em);
       height: 60%;
+    }
+
+    .navigation-btns {
+      display: flex;
+      gap: 32px;
+
+      button {
+        max-width: 125px;
+        font-size: ${(props) => props.theme.fontSizes.standard};
+
+        &:focus-visible {
+          outline: none;
+        }
+      }
     }
   }
 `;

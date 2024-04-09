@@ -56,9 +56,14 @@ function GameOverModal({ levelId, startDateRef, timer, hintsUsed }) {
           <h3>
             Your record has been <span>submitted</span>!
           </h3>
-          <Link to="/">
-            <button className="record-submitted-btn">Back To Home Page</button>
-          </Link>
+          <div className="navigation-btns">
+            <Link to="/levels">
+              <button>Play Another Level</button>
+            </Link>
+            <Link to="/leaderboard">
+              <button>See Leaderboard</button>
+            </Link>
+          </div>
         </>
       ) : (
         <>
