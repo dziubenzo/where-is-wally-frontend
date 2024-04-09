@@ -15,8 +15,14 @@ function App({ children }) {
     <Theme>
       <GlobalStyle />
       <Header />
-      {isLoading ? <LoadingPage /> : <Outlet />}
-      {children}
+      {isLoading ? (
+        <LoadingPage />
+      ) : (
+        <>
+          <Outlet />
+          {children}
+        </>
+      )}
       <Footer />
     </Theme>
   );
