@@ -16,21 +16,24 @@ export const LevelButton = styled.button`
   max-width: 175px;
   padding: 0.5em 1em;
   font-size: ${(props) => props.theme.fontSizes.medium};
-  background-color: ${(props) => props.theme.colours.background};
-  color: ${(props) => props.theme.colours.primary};
+  background-color: ${(props) =>
+    props.selected
+      ? props.theme.colours.primary
+      : props.theme.colours.background};
+  color: ${(props) =>
+    props.selected
+      ? props.theme.colours.background
+      : props.theme.colours.primary};
   border-radius: 16px;
   border: none;
-  outline: 2px solid ${(props) => props.theme.colours.primary};
+  outline: ${(props) =>
+    props.selected
+      ? 'none'
+      : `2px solid ${(props) => props.theme.colours.primary}`};
   cursor: pointer;
 
-  &.selected {
-    background-color: ${(props) => props.theme.colours.primary};
-    color: ${(props) => props.theme.colours.background};
-    outline: none;
-
-    &:focus-visible {
-      outline: 3px solid white;
-    }
+  &:focus-visible {
+    outline: 3px solid white;
   }
 
   @media (hover: hover) {

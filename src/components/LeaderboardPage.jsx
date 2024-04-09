@@ -66,7 +66,7 @@ function LeaderboardPage() {
       <div className="level-buttons">
         <>
           <LevelButton
-            className={pressedButton[0] ? 'selected' : undefined}
+            selected={pressedButton[0]}
             onClick={handleAllButtonClick}
           >
             All
@@ -75,9 +75,7 @@ function LeaderboardPage() {
             return (
               <LevelButton
                 key={level.url_parameter}
-                className={
-                  pressedButton[level.url_parameter] ? 'selected' : undefined
-                }
+                selected={pressedButton[level.url_parameter]}
                 onClick={() => handleLevelButtonClick(level._id)}
               >
                 Level {level.url_parameter}
