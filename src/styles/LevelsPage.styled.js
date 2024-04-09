@@ -4,8 +4,10 @@ export const StyledLevelsPage = styled.main`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 48px;
+  margin: 0 2em;
 
   @media (width <= ${(props) => props.theme.mobile}) {
+    margin: 0 1em;
     gap: 32px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
@@ -19,13 +21,9 @@ export const StyledLevelCard = styled.div`
   outline: 2px solid ${(props) => props.theme.colours.secondary};
   border-radius: 8px;
 
-  a {
-    text-decoration: none;
-  }
-
   h2 {
     position: absolute;
-    left: -16px;
+    left: -24px;
     font-weight: 700;
     background: transparent;
   }
@@ -35,16 +33,25 @@ export const StyledLevelCard = styled.div`
     font-weight: 500;
   }
 
-  img {
-    width: 100%;
+  div {
     height: 100%;
-    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      transform: scale(1.5);
+      filter: contrast(1.2);
+      border-radius: 0 0 8px 8px;
+    }
   }
 
   @media (hover: hover) {
     div {
-      overflow: hidden;
-
       img {
         transition: all 1s ease;
 
