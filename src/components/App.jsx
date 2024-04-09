@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Outlet, useNavigation } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
+import LoadingPage from './LoadingPage';
 
 import Theme from './Theme';
 import GlobalStyle from '../styles/GlobalStyle';
@@ -14,7 +15,7 @@ function App({ children }) {
     <Theme>
       <GlobalStyle />
       <Header />
-      {isLoading ? <h1>Loading...</h1> : <Outlet />}
+      {isLoading ? <LoadingPage /> : <Outlet />}
       {children}
       <Footer />
     </Theme>
