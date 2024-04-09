@@ -6,6 +6,7 @@ import {
   getCircleSize,
   checkImageClick,
   characterButtonsData,
+  ApiError,
 } from '../helpers';
 import Selector from './Selector';
 import Zoomer from './Zoomer';
@@ -17,6 +18,10 @@ import GameOverModal from './GameOverModal';
 function LevelPage() {
   // Get level from Link prop
   const { state } = useLocation();
+  // Handle empty state error
+  if (!state) {
+    throw new ApiError('Access level through the Levels page!', 400);
+  }
   const { _id, url_parameter, image_url, characters } = state;
 
   const imageRef = useRef(null);
