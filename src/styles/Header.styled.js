@@ -11,23 +11,22 @@ export const StyledHeader = styled.header`
     width: 125px;
   }
 
+  a[href='/levels'] {
+    background-color: ${(props) =>
+      props.levels ? props.theme.colours.tertiary : 'none'};
+  }
+
+  a[href='/leaderboard'] {
+    background-color: ${(props) =>
+      props.leaderboard ? props.theme.colours.tertiary : 'none'};
+  }
+
   a[href='/levels'],
   a[href='/leaderboard'] {
     font-size: ${(props) => props.theme.fontSizes.medium};
     text-decoration: none;
     padding: 0.2em 0.5em;
     border-radius: 8px;
-  }
-
-  @media (hover: hover) {
-    a[href='/levels'],
-    a[href='/leaderboard'] {
-      transition: background-color 0.2s ease-in;
-
-      &:hover {
-        background-color: ${(props) => props.theme.colours.tertiary};
-      }
-    }
   }
 
   @media (width <= ${(props) => props.theme.mobile}) {
