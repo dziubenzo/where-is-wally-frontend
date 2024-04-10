@@ -7,7 +7,7 @@ export const StyledHeader = styled.header`
   gap: 64px;
   margin-bottom: 2em;
 
-  a[href='/'] {
+  a[href='/home'] {
     width: 125px;
   }
 
@@ -38,7 +38,7 @@ export const StyledHeader = styled.header`
       font-size: revert;
     }
 
-    a[href='/'] {
+    a[href='/home'] {
       width: 75px;
     }
   }

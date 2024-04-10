@@ -12,7 +12,7 @@ function HomePage() {
         <h2>Leaderboard Entries:</h2>
         <h1>{playersCount}</h1>
         <h2>Latest Entry:</h2>
-        <h1>{latestPlayer ? latestPlayer.nickname : 'No players yet :('}</h1>
+        <h1>{latestPlayer ? latestPlayer.nickname : 'No players...'}</h1>
       </>
     </StyledHomePage>
   );

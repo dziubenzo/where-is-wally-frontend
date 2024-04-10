@@ -14,6 +14,7 @@ import {
 function Router() {
   const router = createBrowserRouter([
     {
+      path: '/',
       element: <App />,
       errorElement: (
         <App>
@@ -22,7 +23,7 @@ function Router() {
       ),
       children: [
         {
-          path: '/',
+          path: 'home',
           element: <HomePage />,
           loader: homePageLoader,
         },

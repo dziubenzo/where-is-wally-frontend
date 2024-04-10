@@ -5,11 +5,11 @@ function Header() {
   const { pathname } = useLocation();
   return (
     <StyledHeader
-      levels={pathname === '/levels' ? "true" : undefined}
-      leaderboard={pathname === '/leaderboard' ? "true" : undefined}
+      levels={pathname === '/levels' ? 'true' : undefined}
+      leaderboard={pathname === '/leaderboard' ? 'true' : undefined}
     >
       <Link to="/levels">Levels</Link>
-      <Link to="/">
+      <Link to="/home">
         <img src="/logo-header.svg" alt="Where's Wally Logo" />
       </Link>
       <Link to="/leaderboard">Leaderboard</Link>
