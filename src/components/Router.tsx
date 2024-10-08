@@ -11,7 +11,7 @@ import {
   leaderboardPageLoader,
 } from '../loaders';
 
-function Router() {
+export default function Router() {
   const router = createBrowserRouter([
     {
       path: '/',
@@ -47,5 +47,3 @@ function Router() {
 
   return <RouterProvider router={router} />;
 }
-
-export default Router;

@@ -1,7 +1,7 @@
 import { StyledHomePage } from '../styles/HomePage.styled';
 import { useLoaderData } from 'react-router-dom';
 
-function HomePage() {
+export default function HomePage() {
   const { levelsCount, playersCount, latestPlayer } = useLoaderData();
 
   return (
@@ -17,5 +17,3 @@ function HomePage() {
     </StyledHomePage>
   );
 }
-
-export default HomePage;

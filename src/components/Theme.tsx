@@ -1,5 +1,11 @@
+import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
-import PropTypes from 'prop-types';
+
+type ThemeType = typeof darkTheme;
+
+type ThemeProps = {
+  children: ReactNode;
+};
 
 const darkTheme = {
   colours: {
@@ -24,10 +30,6 @@ const darkTheme = {
   mobile: '768px',
 };
 
-export default function Theme({ children }) {
+export default function Theme({ children }: ThemeProps) {
   return <ThemeProvider theme={darkTheme}>{children}</ThemeProvider>;
 }
-
-Theme.propTypes = {
-  children: PropTypes.node,
-};

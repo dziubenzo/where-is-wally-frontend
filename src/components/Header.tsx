@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { StyledHeader } from '../styles/Header.styled';
 
-function Header() {
+export default function Header() {
   const { pathname } = useLocation();
   return (
     <StyledHeader
@@ -16,5 +16,3 @@ function Header() {
     </StyledHeader>
   );
 }
-
-export default Header;

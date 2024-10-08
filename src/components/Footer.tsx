@@ -1,6 +1,6 @@
 import { StyledFooter } from '../styles/Footer.styled';
 
-function Footer() {
+export default function Footer() {
   return (
     <StyledFooter>
       <p>
@@ -17,5 +17,3 @@ function Footer() {
     </StyledFooter>
   );
 }
-
-export default Footer;
