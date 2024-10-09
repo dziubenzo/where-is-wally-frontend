@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 type StyledHeaderProps = {
-  levels: boolean;
-  leaderboard: boolean;
+  levels: 'true' | undefined;
+  leaderboard: 'true' | undefined;
 };
 
 export const StyledHeader = styled.header<StyledHeaderProps>`

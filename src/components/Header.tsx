@@ -6,8 +6,8 @@ export default function Header() {
 
   return (
     <StyledHeader
-      levels={pathname === '/levels' ? true : false}
-      leaderboard={pathname === '/leaderboard' ? true : false}
+      levels={pathname === '/levels' ? 'true' : undefined}
+      leaderboard={pathname === '/leaderboard' ? 'true' : undefined}
     >
       <Link to="/levels">Levels</Link>
       <Link to="/home">

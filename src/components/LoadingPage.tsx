@@ -1,6 +1,6 @@
 import { StyledLoadingPage } from '../styles/LoadingPage.styled';
 
-function LoadingPage() {
+export default function LoadingPage() {
   return (
     <StyledLoadingPage>
       <img src="/wally-crew.png" alt="Wally with his friends" />
@@ -8,4 +8,3 @@ function LoadingPage() {
     </StyledLoadingPage>
   );
 }
-export default LoadingPage;

@@ -8,7 +8,7 @@ import {
   StyledLeaderboardTable,
 } from '../styles/LeaderboardPage.styled';
 
-function LeaderboardPage() {
+export default function LeaderboardPage() {
   const { levels, players } = useLoaderData() as LeaderboardPageLoader;
 
   // State for changing heading
@@ -119,5 +119,3 @@ function LeaderboardPage() {
     </StyledLeaderboardPage>
   );
 }
-
-export default LeaderboardPage;

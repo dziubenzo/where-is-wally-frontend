@@ -8,7 +8,7 @@ import {
   getCoordinates,
   getSelectorPosition,
 } from '../helpers';
-import { Level } from '../loaders';
+import type { Level } from '../loaders';
 import { StyledLevelPage } from '../styles/LevelPage.styled';
 import CharacterMarker from './CharacterMarker';
 import GameOverModal from './GameOverModal';
@@ -18,7 +18,7 @@ import Zoomer from './Zoomer';
 
 type LevelState = { state: Level | undefined };
 
-function LevelPage() {
+export default function LevelPage() {
   // Get level from Link prop
   const { state } = useLocation() as LevelState;
   // Handle empty state error
@@ -212,5 +212,3 @@ function LevelPage() {
     </StyledLevelPage>
   );
 }
-
-export default LevelPage;
