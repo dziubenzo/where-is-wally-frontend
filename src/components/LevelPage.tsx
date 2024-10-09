@@ -18,6 +18,13 @@ import Zoomer from './Zoomer';
 
 type LevelState = { state: Level | undefined };
 
+export type SelectorPos = {
+  x: number;
+  y: number;
+};
+
+export type ZoomPos = { percentX: number; percentY: number };
+
 export default function LevelPage() {
   // Get level from Link prop
   const { state } = useLocation() as LevelState;
@@ -32,12 +39,15 @@ export default function LevelPage() {
 
   // Selector states
   const [selectorSize, setSelectorSize] = useState(0);
-  const [selectorPos, setSelectorPos] = useState({ x: 0, y: 0 });
+  const [selectorPos, setSelectorPos] = useState<SelectorPos>({
+    x: 0,
+    y: 0,
+  });
   const [showSelector, setShowSelector] = useState(false);
 
   // Magnifying glass states
   const [showZoomer, setShowZoomer] = useState(false);
-  const [zoomPos, setZoomPos] = useState({ percentX: 0, percentY: 0 });
+  const [zoomPos, setZoomPos] = useState<ZoomPos>({ percentX: 0, percentY: 0 });
 
   // Game flow states
   const [charactersToFind, setCharactersToFind] = useState<string[]>([

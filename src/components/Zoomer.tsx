@@ -1,11 +1,12 @@
 import { Level } from '../loaders';
 import { MagnifiedImage, StyledZoomer } from '../styles/LevelPage.styled';
+import type { SelectorPos, ZoomPos } from './LevelPage';
 
 type ZoomerProps = {
   imageURL: Level['image_url'];
   urlParameter: Level['url_parameter'];
-  coordinates: { x: number; y: number };
-  zoom: { percentX: number; percentY: number };
+  coordinates: SelectorPos;
+  zoom: ZoomPos;
 };
 
 export default function Zoomer({

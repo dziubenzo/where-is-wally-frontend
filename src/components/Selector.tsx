@@ -1,9 +1,10 @@
 import { characterButtonsData } from '../helpers';
 import { StyledMenu, StyledSelector } from '../styles/LevelPage.styled';
+import type { SelectorPos } from './LevelPage';
 import SelectorButton from './SelectorButton';
 
 type SelectorProps = {
-  coordinates: { x: number; y: number };
+  coordinates: SelectorPos;
   size: number;
   currentClick: string;
   charactersToFind: string[];

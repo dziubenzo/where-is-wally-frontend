@@ -1,38 +1,33 @@
 import styled from 'styled-components';
+import type { SelectorPos, ZoomPos } from '../components/LevelPage';
+import type { PixelCoords } from '../components/CharacterMarker';
+import type { HintSize } from '../components/HintMarker';
+import type { CharacterButton } from '../helpers';
 
 type StyledCharacterMarkerProps = {
-  position: {
-    pixelX: number;
-    pixelY: number;
-  };
+  position: PixelCoords;
   size: number;
 };
 
 type StyledHintMarkerProps = {
-  position: {
-    pixelX: number;
-    pixelY: number;
-  };
-  size: {
-    sizeX: number;
-    sizeY: number;
-  };
-  hintcolour: string;
+  position: PixelCoords;
+  size: HintSize;
+  hintcolour: CharacterButton['hintColour'];
 };
 
 type StyledSelectorProps = {
-  coordinates: { x: number; y: number };
+  coordinates: SelectorPos;
   size: number;
 };
 
 type StyledMenuProps = {
-  coordinates: StyledSelectorProps['coordinates'];
+  coordinates: SelectorPos;
 };
 
 type StyledZoomerProps = StyledMenuProps;
 
 type MagnifiedImageProps = {
-  zoom: { percentX: number; percentY: number };
+  zoom: ZoomPos;
 };
 
 export const StyledLevelPage = styled.main`

@@ -13,6 +13,11 @@ type CharacterMarkerProps = {
   imageRef: RefObject<HTMLImageElement>;
 };
 
+export type PixelCoords = {
+  pixelX: number;
+  pixelY: number;
+};
+
 export default function CharacterMarker({
   charactersToFind,
   character,
@@ -21,7 +26,7 @@ export default function CharacterMarker({
   const { name, x, y } = character;
 
   // States for pixel coordinates and size of character marker
-  const [pixelCoordinates, setPixelCoordinates] = useState({
+  const [pixelCoordinates, setPixelCoordinates] = useState<PixelCoords>({
     pixelX: 0,
     pixelY: 0,
   });

@@ -1,10 +1,11 @@
 import { FormEvent, RefObject, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import API_URL from '../API';
+import type { Level } from '../loaders';
 import { StyledGameOverModal } from '../styles/LevelPage.styled';
 
 type GameOverModalProps = {
-  levelId: string;
+  levelId: Level['_id'];
   startDateRef: RefObject<number>;
   timer: number;
   hintsUsed: boolean;
