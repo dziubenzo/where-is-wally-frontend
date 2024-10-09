@@ -1,26 +1,5 @@
 import type { RefObject } from 'react';
-
-type GetCoordinates = (
-  imageRef: RefObject<HTMLImageElement>,
-  event: React.MouseEvent<HTMLImageElement, MouseEvent>,
-  precise?: boolean,
-) => { percentX: number; percentY: number };
-
-type GetSelectorPosition = (
-  imageRef: RefObject<HTMLImageElement>,
-  event: React.MouseEvent<HTMLImageElement, MouseEvent>,
-) => { x: number; y: number };
-
-type GetCircleSize = (
-  imageRef: RefObject<HTMLImageElement>,
-  percent?: number,
-) => number;
-
-type CheckImageClick = (
-  clickX: number,
-  clickY: number,
-  characters: any[],
-) => string;
+import type { Level } from './loaders';
 
 export type CharacterButton = {
   imageURL: string;
@@ -28,32 +7,12 @@ export type CharacterButton = {
   hintColour: string;
 };
 
-type GetCharacterMarkerPos = (
-  characterX: number,
-  characterY: number,
-  imageRef: RefObject<HTMLImageElement>,
-) => { pixelX: number; pixelY: number };
-
-type GetHintSize = (imageRef: RefObject<HTMLImageElement>) => {
-  sizeX: number;
-  sizeY: number;
-};
-
-type GetHintMarkerPos = GetCharacterMarkerPos;
-
-type GetRandomInteger = (integer: number) => number;
-
-type GetShifts = (imageRef: RefObject<HTMLImageElement>) => {
-  shiftX: number;
-  shiftY: number;
-};
-
 // Calculate the x and y coordinates of a click relative to the image
 // Return them in percent format
-export const getCoordinates: GetCoordinates = (
-  imageRef,
-  event,
-  precise = false,
+export const getCoordinates = (
+  imageRef: RefObject<HTMLImageElement>,
+  event: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  precise: boolean = false,
 ) => {
   const { width, height, left, top } =
     imageRef.current!.getBoundingClientRect();
@@ -72,7 +31,10 @@ export const getCoordinates: GetCoordinates = (
 // Calculate selector position
 // Take scroll value into account
 // Center selector on click target
-export const getSelectorPosition: GetSelectorPosition = (imageRef, event) => {
+export const getSelectorPosition = (
+  imageRef: RefObject<HTMLImageElement>,
+  event: React.MouseEvent<HTMLImageElement, MouseEvent>,
+) => {
   const x = Math.round(
     event.clientX + window.scrollX - getCircleSize(imageRef) / 2,
   );
@@ -84,7 +46,10 @@ export const getSelectorPosition: GetSelectorPosition = (imageRef, event) => {
 
 // Calculate selector/character marker size based on image height
 // Use default value for selector
-export const getCircleSize: GetCircleSize = (imageRef, percent = 5) => {
+export const getCircleSize = (
+  imageRef: RefObject<HTMLImageElement>,
+  percent: number = 5,
+) => {
   const PERCENT_OF_IMAGE_HEIGHT = percent;
   const { height } = imageRef.current!.getBoundingClientRect();
   return Math.round((height * PERCENT_OF_IMAGE_HEIGHT) / 100);
@@ -92,10 +57,10 @@ export const getCircleSize: GetCircleSize = (imageRef, percent = 5) => {
 
 // Check if image click is character click
 // Return character name or empty string otherwise
-export const checkImageClick: CheckImageClick = (
-  clickX,
-  clickY,
-  characters,
+export const checkImageClick = (
+  clickX: number,
+  clickY: number,
+  characters: Level['characters'],
 ) => {
   const ERROR_THRESHOLD_PERCENT_X = 1;
   const ERROR_THRESHOLD_PERCENT_Y = 2;
@@ -157,10 +122,10 @@ export const characterButtonsData: CharacterButton[] = [
 
 // Convert character's percent coordinates into pixels taking into account image size, its location from the top and left of viewport and scroll
 // Centre the resulting circle on the character
-export const getCharacterMarkerPos: GetCharacterMarkerPos = (
-  characterX,
-  characterY,
-  imageRef,
+export const getCharacterMarkerPos = (
+  characterX: number,
+  characterY: number,
+  imageRef: RefObject<HTMLImageElement>,
 ) => {
   const { width, height, left, top } =
     imageRef.current!.getBoundingClientRect();
@@ -174,7 +139,7 @@ export const getCharacterMarkerPos: GetCharacterMarkerPos = (
 };
 
 // Calculate hint marker size based on image height and width
-export const getHintSize: GetHintSize = (imageRef) => {
+export const getHintSize = (imageRef: RefObject<HTMLImageElement>) => {
   const PERCENT_OF_IMAGE_HEIGHT = 33;
   const PERCENT_OF_IMAGE_WIDTH = 33;
   const { width, height } = imageRef.current!.getBoundingClientRect();
@@ -184,10 +149,10 @@ export const getHintSize: GetHintSize = (imageRef) => {
 };
 
 // Convert character's percent coordinates into pixels taking into account image size, its location from the top and left of viewport and scroll
-export const getHintMarkerPos: GetHintMarkerPos = (
-  characterX,
-  characterY,
-  imageRef,
+export const getHintMarkerPos = (
+  characterX: number,
+  characterY: number,
+  imageRef: RefObject<HTMLImageElement>,
 ) => {
   const { width, height, left, top } =
     imageRef.current!.getBoundingClientRect();
@@ -203,7 +168,7 @@ export const getHintMarkerPos: GetHintMarkerPos = (
 };
 
 // Generate a random integer between -number and number
-export const getRandomInteger: GetRandomInteger = (integer) => {
+export const getRandomInteger = (integer: number) => {
   const min = integer - integer * 2;
   const max = integer;
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -211,7 +176,7 @@ export const getRandomInteger: GetRandomInteger = (integer) => {
 
 // Generate random shifts of the max value of SHIFT_PERCENT (25% seems OK) of the hint marker width/height in both x and y directions
 // With no shifts, the character would always in the centre of the hint marker
-export const getShifts: GetShifts = (imageRef) => {
+export const getShifts = (imageRef: RefObject<HTMLImageElement>) => {
   const SHIFT_PERCENT = 25;
   const { sizeX, sizeY } = getHintSize(imageRef);
   const shiftX = getRandomInteger((sizeX * SHIFT_PERCENT) / 100);
