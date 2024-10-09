@@ -20,15 +20,19 @@ export default function LeaderboardPage() {
   // State for displaying table data
   const [tableData, setTableData] = useState(players);
 
+  console.log(pressedButton);
+
   function handleLevelButtonClick(levelId: Level['_id']) {
     const [currentLevel] = levels.filter((level) => level._id === levelId);
     setHeading(`Level ${currentLevel.url_parameter} - ${currentLevel.name}`);
     setPressedButton(
       pressedButton.map((button, index) => {
         if (index === currentLevel.url_parameter) {
-          return (button = true);
+          button = true;
+          return button;
         } else {
-          return (button = false);
+          button = false;
+          return button;
         }
       }),
     );
@@ -40,9 +44,11 @@ export default function LeaderboardPage() {
     setPressedButton(
       pressedButton.map((button, index) => {
         if (index === 0) {
-          return (button = true);
+          button = true;
+          return button;
         } else {
-          return (button = false);
+          button = false;
+          return button;
         }
       }),
     );
@@ -54,9 +60,11 @@ export default function LeaderboardPage() {
     setPressedButton(
       pressedButton.map((button, index) => {
         if (index === 0) {
-          return (button = true);
+          button = true;
+          return button;
         } else {
-          return (button = false);
+          button = false;
+          return button;
         }
       }),
     );
