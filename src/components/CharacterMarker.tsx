@@ -1,9 +1,23 @@
-import PropTypes from 'prop-types';
-import { StyledCharacterMarker } from '../styles/LevelPage.styled';
+import { RefObject, useEffect, useState } from 'react';
 import { getCharacterMarkerPos, getCircleSize } from '../helpers';
-import { useEffect, useState } from 'react';
+import { Character } from '../loaders';
+import { StyledCharacterMarker } from '../styles/LevelPage.styled';
 
-function CharacterMarker({ charactersToFind, character, imageRef }) {
+type CharacterMarkerProps = {
+  charactersToFind: string[];
+  character:
+    | Character<'wally'>
+    | Character<'wenda'>
+    | Character<'wizard'>
+    | Character<'odlaw'>;
+  imageRef: RefObject<HTMLImageElement>;
+};
+
+export default function CharacterMarker({
+  charactersToFind,
+  character,
+  imageRef,
+}: CharacterMarkerProps) {
   const { name, x, y } = character;
 
   // States for pixel coordinates and size of character marker
@@ -11,7 +25,7 @@ function CharacterMarker({ charactersToFind, character, imageRef }) {
     pixelX: 0,
     pixelY: 0,
   });
-  const [markerSize, setMarkerSize] = useState(null);
+  const [markerSize, setMarkerSize] = useState(0);
 
   // Calculate character marker's pixel coordinates and size upon component render
   // Recalculate pixel coordinates and size whenever browser is resized
@@ -40,11 +54,3 @@ function CharacterMarker({ charactersToFind, character, imageRef }) {
     </>
   );
 }
-
-CharacterMarker.propTypes = {
-  charactersToFind: PropTypes.array,
-  character: PropTypes.object,
-  imageRef: PropTypes.object,
-};
-
-export default CharacterMarker;

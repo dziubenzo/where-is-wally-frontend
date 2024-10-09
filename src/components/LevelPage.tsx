@@ -14,36 +14,39 @@ import { useLocation } from 'react-router-dom';
 import CharacterMarker from './CharacterMarker';
 import HintMarker from './HintMarker';
 import GameOverModal from './GameOverModal';
+import { Level } from '../loaders';
+
+type LevelState = { state: Level | undefined };
 
 function LevelPage() {
   // Get level from Link prop
-  const { state } = useLocation();
+  const { state } = useLocation() as LevelState;
   // Handle empty state error
   if (!state) {
     throw new ApiError('Access level through the Levels page!', 400);
   }
   const { _id, url_parameter, image_url, characters } = state;
 
-  const imageRef = useRef(null);
-  const startDateRef = useRef(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const startDateRef = useRef<number>();
 
   // Selector states
-  const [selectorSize, setSelectorSize] = useState(null);
+  const [selectorSize, setSelectorSize] = useState(0);
   const [selectorPos, setSelectorPos] = useState({ x: 0, y: 0 });
   const [showSelector, setShowSelector] = useState(false);
 
   // Magnifying glass states
   const [showZoomer, setShowZoomer] = useState(false);
-  const [zoomPos, setZoomPos] = useState({ percentX: '50%', percentY: '50%' });
+  const [zoomPos, setZoomPos] = useState({ percentX: 0, percentY: 0 });
 
   // Game flow states
-  const [charactersToFind, setCharactersToFind] = useState([
+  const [charactersToFind, setCharactersToFind] = useState<string[]>([
     'wally',
     'wenda',
     'wizard',
     'odlaw',
   ]);
-  const [currentClick, setCurrentClick] = useState(false);
+  const [currentClick, setCurrentClick] = useState('');
   const [timer, setTimer] = useState(0);
 
   // Hints states
@@ -70,14 +73,16 @@ function LevelPage() {
     if (charactersToFind.length) {
       setTimeout(() => {
         setTimer(timer + 0.01);
-        if (startDateRef.current === null) {
+        if (!startDateRef.current) {
           startDateRef.current = Date.now();
         }
       }, 10);
     }
   }, [charactersToFind, timer]);
 
-  function handleImageClick(event) {
+  function handleImageClick(
+    event: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  ) {
     // Hide zoomer
     setShowZoomer(false);
     // Set state according to the result of the click (character name or empty string)
@@ -93,7 +98,9 @@ function LevelPage() {
     setSelectorPos(newSelectorPos);
   }
 
-  function handleImageHover(event) {
+  function handleImageHover(
+    event: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  ) {
     // Update position of selector, menu and zoomer
     const newSelectorPos = getSelectorPosition(imageRef, event);
     setSelectorPos(newSelectorPos);
@@ -107,12 +114,15 @@ function LevelPage() {
     setShowZoomer(false);
   }
 
-  function handleImageEnter(event) {
+  function handleImageEnter(
+    event: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  ) {
     // Hide selector only when img is entered from the "outside", i.e. not when you enter img from selector buttons
     if (
-      event.relatedTarget instanceof Window ||
-      event.relatedTarget.className === 'game-info' ||
-      event.relatedTarget.localName === 'main'
+      event.relatedTarget instanceof Element &&
+      (event.relatedTarget instanceof Window ||
+        event.relatedTarget?.className === 'game-info' ||
+        event.relatedTarget?.localName === 'main')
     ) {
       setShowZoomer(true);
       setShowSelector(false);

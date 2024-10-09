@@ -2,13 +2,13 @@ import type { RefObject } from 'react';
 
 type GetCoordinates = (
   imageRef: RefObject<HTMLImageElement>,
-  event: MouseEvent,
-  precise: boolean,
+  event: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  precise?: boolean,
 ) => { percentX: number; percentY: number };
 
 type GetSelectorPosition = (
   imageRef: RefObject<HTMLImageElement>,
-  event: MouseEvent,
+  event: React.MouseEvent<HTMLImageElement, MouseEvent>,
 ) => { x: number; y: number };
 
 type GetCircleSize = (

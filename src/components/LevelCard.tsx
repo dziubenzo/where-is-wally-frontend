@@ -1,8 +1,12 @@
-import PropTypes from 'prop-types';
-import { StyledLevelCard } from '../styles/LevelsPage.styled';
 import { Link } from 'react-router-dom';
+import type { Level } from '../loaders';
+import { StyledLevelCard } from '../styles/LevelsPage.styled';
 
-function LevelCard({ level }) {
+type LevelCardProps = {
+  level: Level;
+};
+
+export default function LevelCard({ level }: LevelCardProps) {
   const { url_parameter, name, image_url } = level;
 
   return (
@@ -20,9 +24,3 @@ function LevelCard({ level }) {
     </StyledLevelCard>
   );
 }
-
-LevelCard.propTypes = {
-  level: PropTypes.object,
-};
-
-export default LevelCard;

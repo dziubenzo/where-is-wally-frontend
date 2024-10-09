@@ -1,7 +1,42 @@
 import API_URL from './API';
 import { ApiError } from './helpers';
 
-export async function homePageLoader() {
+export type Character<name> = {
+  _id: string;
+  name: name;
+  x: number;
+  y: number;
+};
+
+export type Level = {
+  _id: string;
+  url_parameter: number;
+  name: string;
+  image_url: string;
+  characters: [
+    Character<'wally'>,
+    Character<'wenda'>,
+    Character<'wizard'>,
+    Character<'odlaw'>,
+  ];
+  __v: number;
+};
+
+export type Player = {
+  _id: string;
+  nickname: string;
+  level: Level;
+  start_date: Date;
+  end_date: Date;
+  duration: number;
+  __v: number;
+};
+
+export async function homePageLoader(): Promise<{
+  levelsCount: number;
+  playersCount: number;
+  latestPlayer: number;
+}> {
   const [resLevelsCount, resPlayersCount, resLatestPlayer] = await Promise.all([
     fetch(`${API_URL}/levels/count`),
     fetch(`${API_URL}/players/count`),
@@ -37,18 +72,21 @@ export async function homePageLoader() {
   return { levelsCount, playersCount, latestPlayer };
 }
 
-export async function levelsPageLoader() {
+export async function levelsPageLoader(): Promise<Level[]> {
   const resLevels = await fetch(`${API_URL}/levels`);
   // Handle errors by triggering ErrorPage render with error status code and status text
   if (!resLevels.ok) {
     const error = new ApiError(resLevels.statusText, resLevels.status);
     throw error;
   }
-  const levels = await resLevels.json();
+  const levels: Level[] = await resLevels.json();
   return levels;
 }
 
-export async function leaderboardPageLoader() {
+export async function leaderboardPageLoader(): Promise<{
+  levels: Level[];
+  players: Player[];
+}> {
   const [resLevels, resPlayers] = await Promise.all([
     fetch(`${API_URL}/levels`),
     fetch(`${API_URL}/players`),
