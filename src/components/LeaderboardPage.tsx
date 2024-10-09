@@ -1,14 +1,15 @@
+import { format } from 'date-fns';
+import { useEffect, useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
+import { LeaderboardPageLoader, Level } from '../loaders';
 import {
-  StyledLeaderboardPage,
   LevelButton,
+  StyledLeaderboardPage,
   StyledLeaderboardTable,
 } from '../styles/LeaderboardPage.styled';
-import { useLoaderData } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { format } from 'date-fns';
 
 function LeaderboardPage() {
-  const { levels, players } = useLoaderData();
+  const { levels, players } = useLoaderData() as LeaderboardPageLoader;
 
   // State for changing heading
   const [heading, setHeading] = useState('All');
@@ -19,7 +20,7 @@ function LeaderboardPage() {
   // State for displaying table data
   const [tableData, setTableData] = useState(players);
 
-  function handleLevelButtonClick(levelId) {
+  function handleLevelButtonClick(levelId: Level['_id']) {
     const [currentLevel] = levels.filter((level) => level._id === levelId);
     setHeading(`Level ${currentLevel.url_parameter} - ${currentLevel.name}`);
     setPressedButton(

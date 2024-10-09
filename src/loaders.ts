@@ -29,14 +29,24 @@ export type Player = {
   start_date: Date;
   end_date: Date;
   duration: number;
+  hints_used: boolean;
   __v: number;
 };
 
-export async function homePageLoader(): Promise<{
+export type HomePageLoader = {
   levelsCount: number;
   playersCount: number;
-  latestPlayer: number;
-}> {
+  latestPlayer: Player;
+};
+
+export type LevelsPageLoader = Level[];
+
+export type LeaderboardPageLoader = {
+  levels: Level[];
+  players: Player[];
+};
+
+export async function homePageLoader(): Promise<HomePageLoader> {
   const [resLevelsCount, resPlayersCount, resLatestPlayer] = await Promise.all([
     fetch(`${API_URL}/levels/count`),
     fetch(`${API_URL}/players/count`),
@@ -72,7 +82,7 @@ export async function homePageLoader(): Promise<{
   return { levelsCount, playersCount, latestPlayer };
 }
 
-export async function levelsPageLoader(): Promise<Level[]> {
+export async function levelsPageLoader(): Promise<LevelsPageLoader> {
   const resLevels = await fetch(`${API_URL}/levels`);
   // Handle errors by triggering ErrorPage render with error status code and status text
   if (!resLevels.ok) {
@@ -83,10 +93,7 @@ export async function levelsPageLoader(): Promise<Level[]> {
   return levels;
 }
 
-export async function leaderboardPageLoader(): Promise<{
-  levels: Level[];
-  players: Player[];
-}> {
+export async function leaderboardPageLoader(): Promise<LeaderboardPageLoader> {
   const [resLevels, resPlayers] = await Promise.all([
     fetch(`${API_URL}/levels`),
     fetch(`${API_URL}/players`),

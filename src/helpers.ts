@@ -22,7 +22,7 @@ type CheckImageClick = (
   characters: any[],
 ) => string;
 
-type CharacterButton = {
+export type CharacterButton = {
   imageURL: string;
   alt: string;
   hintColour: string;

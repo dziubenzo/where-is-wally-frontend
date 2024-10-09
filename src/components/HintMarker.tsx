@@ -1,15 +1,27 @@
-import PropTypes from 'prop-types';
+import { RefObject, useEffect, useState } from 'react';
+import { CharacterButton, getHintMarkerPos, getHintSize } from '../helpers';
+import { Character } from '../loaders';
 import { StyledHintMarker } from '../styles/LevelPage.styled';
-import { useState, useEffect } from 'react';
-import { getHintSize, getHintMarkerPos } from '../helpers';
 
-function HintMarker({
+type HintMarkerProps = {
+  character:
+    | Character<'wally'>
+    | Character<'wenda'>
+    | Character<'wizard'>
+    | Character<'odlaw'>;
+  imageRef: RefObject<HTMLImageElement>;
+  showHints: boolean;
+  hintColour: CharacterButton['hintColour'];
+  charactersToFind: string[];
+};
+
+export default function HintMarker({
   character,
   imageRef,
   showHints,
-  hintcolour,
+  hintColour,
   charactersToFind,
-}) {
+}: HintMarkerProps) {
   const { x, y, name } = character;
 
   // States for pixel coordinates and size of character marker
@@ -27,7 +39,7 @@ function HintMarker({
     setTimeout(() => {
       setPixelCoordinates(getHintMarkerPos(x, y, imageRef));
     }, 0);
-    setMarkerSize(getHintSize(imageRef, 10));
+    setMarkerSize(getHintSize(imageRef));
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -40,19 +52,9 @@ function HintMarker({
         <StyledHintMarker
           position={pixelCoordinates}
           size={markerSize}
-          hintcolour={hintcolour}
+          hintcolour={hintColour}
         ></StyledHintMarker>
       )}
     </>
   );
 }
-
-HintMarker.propTypes = {
-  character: PropTypes.object,
-  imageRef: PropTypes.object,
-  showHints: PropTypes.bool,
-  hintColour: PropTypes.string,
-  charactersToFind: PropTypes.array,
-};
-
-export default HintMarker;

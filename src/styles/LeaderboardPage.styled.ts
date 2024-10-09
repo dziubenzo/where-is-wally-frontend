@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+type LevelButtonProps = {
+  selected: number;
+};
+
 export const StyledLeaderboardPage = styled.main`
   display: flex;
   flex-direction: column;
@@ -15,7 +19,7 @@ export const StyledLeaderboardPage = styled.main`
   }
 `;
 
-export const LevelButton = styled.button`
+export const LevelButton = styled.button<LevelButtonProps>`
   max-width: 175px;
   padding: 0.5em 1em;
   font-size: ${(props) => props.theme.fontSizes.medium};
@@ -30,9 +34,7 @@ export const LevelButton = styled.button`
   border-radius: 16px;
   border: none;
   outline: ${(props) =>
-    props.selected
-      ? 'none'
-      : `2px solid ${(props) => props.theme.colours.primary}`};
+    props.selected ? 'none' : `2px solid ${props.theme.colours.primary}`};
   cursor: pointer;
 
   &:focus-visible {

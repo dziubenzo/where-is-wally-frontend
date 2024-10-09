@@ -1,22 +1,33 @@
-import PropTypes from 'prop-types';
-import { StyledGameOverModal } from '../styles/LevelPage.styled';
-import { useRef, useEffect, useState } from 'react';
-import API_URL from '../API';
+import { FormEvent, RefObject, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import API_URL from '../API';
+import { StyledGameOverModal } from '../styles/LevelPage.styled';
 
-function GameOverModal({ levelId, startDateRef, timer, hintsUsed }) {
-  const modalRef = useRef(null);
+type GameOverModalProps = {
+  levelId: string;
+  startDateRef: RefObject<number>;
+  timer: number;
+  hintsUsed: boolean;
+};
 
-  const [error, setError] = useState(null);
+export default function GameOverModal({
+  levelId,
+  startDateRef,
+  timer,
+  hintsUsed,
+}: GameOverModalProps) {
+  const modalRef = useRef<HTMLDialogElement>(null);
+
+  const [error, setError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [endDate, setEndDate] = useState(null);
+  const [endDate, setEndDate] = useState(0);
 
   // Submit record
-  async function submitRecord(event) {
+  async function submitRecord(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsSubmitting(true);
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.currentTarget);
     const newRecordData = {
       nickname: formData.get('nickname'),
       level: levelId,
@@ -44,7 +55,7 @@ function GameOverModal({ levelId, startDateRef, timer, hintsUsed }) {
   // Show modal for the backdrop pseudo element to work
   // Set end date based on timer for ms accuracy
   useEffect(() => {
-    modalRef.current.showModal();
+    modalRef.current!.showModal();
     setEndDate(Number(startDateRef.current) + Math.round(timer * 1000));
   }, [startDateRef, timer]);
 
@@ -97,12 +108,3 @@ function GameOverModal({ levelId, startDateRef, timer, hintsUsed }) {
     </StyledGameOverModal>
   );
 }
-
-GameOverModal.propTypes = {
-  levelId: PropTypes.string,
-  startDateRef: PropTypes.object,
-  timer: PropTypes.number,
-  hintsUsed: PropTypes.bool,
-};
-
-export default GameOverModal;
