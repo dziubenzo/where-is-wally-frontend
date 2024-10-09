@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 type LevelButtonProps = {
-  selected: number;
+  selected: boolean;
 };
 
 export const StyledLeaderboardPage = styled.main`

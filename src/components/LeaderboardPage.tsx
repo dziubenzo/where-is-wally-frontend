@@ -14,8 +14,8 @@ export default function LeaderboardPage() {
   // State for changing heading
   const [heading, setHeading] = useState('All');
   // State for highlighting currently pressed filter button
-  const [pressedButton, setPressedButton] = useState(
-    new Array(levels.length + 1).fill(null),
+  const [pressedButton, setPressedButton] = useState<boolean[]>(
+    new Array(levels.length + 1).fill(false),
   );
   // State for displaying table data
   const [tableData, setTableData] = useState(players);
@@ -28,7 +28,7 @@ export default function LeaderboardPage() {
         if (index === currentLevel.url_parameter) {
           return (button = true);
         } else {
-          return (button = null);
+          return (button = false);
         }
       }),
     );
@@ -42,7 +42,7 @@ export default function LeaderboardPage() {
         if (index === 0) {
           return (button = true);
         } else {
-          return (button = null);
+          return (button = false);
         }
       }),
     );
@@ -56,7 +56,7 @@ export default function LeaderboardPage() {
         if (index === 0) {
           return (button = true);
         } else {
-          return (button = null);
+          return (button = false);
         }
       }),
     );
