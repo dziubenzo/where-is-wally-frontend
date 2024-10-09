@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const StyledHeader = styled.header`
+type StyledHeaderProps = {
+  levels: boolean;
+  leaderboard: boolean;
+};
+
+export const StyledHeader = styled.header<StyledHeaderProps>`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   place-items: center;

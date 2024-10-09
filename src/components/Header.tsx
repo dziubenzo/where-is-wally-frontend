@@ -3,10 +3,11 @@ import { StyledHeader } from '../styles/Header.styled';
 
 export default function Header() {
   const { pathname } = useLocation();
+
   return (
     <StyledHeader
-      levels={pathname === '/levels' ? 'true' : undefined}
-      leaderboard={pathname === '/leaderboard' ? 'true' : undefined}
+      levels={pathname === '/levels' ? true : false}
+      leaderboard={pathname === '/leaderboard' ? true : false}
     >
       <Link to="/levels">Levels</Link>
       <Link to="/home">
