@@ -1,5 +1,40 @@
 import styled from 'styled-components';
 
+type StyledCharacterMarkerProps = {
+  position: {
+    pixelX: number;
+    pixelY: number;
+  };
+  size: number;
+};
+
+type StyledHintMarkerProps = {
+  position: {
+    pixelX: number;
+    pixelY: number;
+  };
+  size: {
+    sizeX: number;
+    sizeY: number;
+  };
+  hintcolour: string;
+};
+
+type StyledSelectorProps = {
+  coordinates: { x: number; y: number };
+  size: number;
+};
+
+type StyledMenuProps = {
+  coordinates: StyledSelectorProps['coordinates'];
+};
+
+type StyledZoomerProps = StyledMenuProps;
+
+type MagnifiedImageProps = {
+  zoom: { percentX: number; percentY: number };
+};
+
 export const StyledLevelPage = styled.main`
   display: flex;
   flex-direction: column;
@@ -64,12 +99,14 @@ export const StyledLevelPage = styled.main`
   }
 `;
 
-export const StyledSelector = styled.div.attrs((props) => ({
-  style: {
-    top: `${props.coordinates.y}px`,
-    left: `${props.coordinates.x}px`,
-  },
-}))`
+export const StyledSelector = styled.div.attrs<StyledSelectorProps>(
+  (props) => ({
+    style: {
+      top: `${props.coordinates.y}px`,
+      left: `${props.coordinates.x}px`,
+    },
+  }),
+)`
   position: absolute;
   background: transparent;
   border-radius: 50%;
@@ -80,12 +117,14 @@ export const StyledSelector = styled.div.attrs((props) => ({
   z-index: 1;
 `;
 
-export const StyledCharacterMarker = styled.div.attrs((props) => ({
-  style: {
-    top: `${props.position.pixelY}px`,
-    left: `${props.position.pixelX}px`,
-  },
-}))`
+export const StyledCharacterMarker = styled.div.attrs<StyledCharacterMarkerProps>(
+  (props) => ({
+    style: {
+      top: `${props.position.pixelY}px`,
+      left: `${props.position.pixelX}px`,
+    },
+  }),
+)`
   position: absolute;
   background: transparent;
   border-radius: 50%;
@@ -95,12 +134,14 @@ export const StyledCharacterMarker = styled.div.attrs((props) => ({
   pointer-events: none;
 `;
 
-export const StyledHintMarker = styled.div.attrs((props) => ({
-  style: {
-    top: `${props.position.pixelY}px`,
-    left: `${props.position.pixelX}px`,
-  },
-}))`
+export const StyledHintMarker = styled.div.attrs<StyledHintMarkerProps>(
+  (props) => ({
+    style: {
+      top: `${props.position.pixelY}px`,
+      left: `${props.position.pixelX}px`,
+    },
+  }),
+)`
   position: absolute;
   background: transparent;
   width: ${(props) => props.size.sizeX}px;
@@ -109,7 +150,7 @@ export const StyledHintMarker = styled.div.attrs((props) => ({
   pointer-events: none;
 `;
 
-export const StyledMenu = styled.div.attrs((props) => ({
+export const StyledMenu = styled.div.attrs<StyledMenuProps>((props) => ({
   style: {
     top: `${props.coordinates.y + 40}px`,
     left: `${props.coordinates.x - 185}px`,
@@ -155,7 +196,7 @@ export const StyledSelectorButton = styled.button`
   }
 `;
 
-export const StyledZoomer = styled.div.attrs((props) => ({
+export const StyledZoomer = styled.div.attrs<StyledZoomerProps>((props) => ({
   style: {
     top: `${props.coordinates.y - 300}px`,
     left: `${props.coordinates.x - 300}px`,
@@ -176,11 +217,13 @@ export const StyledZoomer = styled.div.attrs((props) => ({
   }
 `;
 
-export const MagnifiedImage = styled.img.attrs((props) => ({
-  style: {
-    transformOrigin: `${props.zoom.percentX}% ${props.zoom.percentY}%`,
-  },
-}))`
+export const MagnifiedImage = styled.img.attrs<MagnifiedImageProps>(
+  (props) => ({
+    style: {
+      transformOrigin: `${props.zoom.percentX}% ${props.zoom.percentY}%`,
+    },
+  }),
+)`
   transform: scale(7);
   filter: contrast(130%);
   padding: 1.4em; // This ensures that the transform-origin-based zooming works well everywhere for the scale of 7 by ensuring that the centre of the zoom is always where the cursor points

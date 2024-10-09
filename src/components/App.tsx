@@ -13,7 +13,7 @@ import LoadingPage from './LoadingPage';
 import Theme from './Theme';
 
 type AppProps = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export default function App({ children }: AppProps) {

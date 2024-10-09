@@ -1,9 +1,20 @@
-import PropTypes from 'prop-types';
-import { StyledSelectorButton } from '../styles/LevelPage.styled';
 import { useState } from 'react';
-StyledSelectorButton;
+import { StyledSelectorButton } from '../styles/LevelPage.styled';
+import { CharacterButton } from '../helpers';
 
-function SelectorButton({ charactersToFind, imageURL, alt, checkGuess }) {
+type SelectorButtonProps = {
+  charactersToFind: string[];
+  imageURL: CharacterButton['imageURL'];
+  alt: CharacterButton['alt'];
+  checkGuess: (buttonCharacter: string) => boolean;
+};
+
+export default function SelectorButton({
+  charactersToFind,
+  imageURL,
+  alt,
+  checkGuess,
+}: SelectorButtonProps) {
   // State for giving user feedback on button click
   const [goodGuess, setGoodGuess] = useState(false);
   const [badGuess, setBadGuess] = useState(false);
@@ -46,12 +57,3 @@ function SelectorButton({ charactersToFind, imageURL, alt, checkGuess }) {
     </>
   );
 }
-
-SelectorButton.propTypes = {
-  charactersToFind: PropTypes.array,
-  imageURL: PropTypes.string,
-  alt: PropTypes.string,
-  checkGuess: PropTypes.func,
-};
-
-export default SelectorButton;

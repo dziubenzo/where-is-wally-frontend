@@ -1,9 +1,18 @@
-import PropTypes from 'prop-types';
-import { StyledSelector, StyledMenu } from '../styles/LevelPage.styled';
-import SelectorButton from './SelectorButton';
 import { characterButtonsData } from '../helpers';
+import { StyledMenu, StyledSelector } from '../styles/LevelPage.styled';
+import SelectorButton from './SelectorButton';
 
-function Selector({
+type SelectorProps = {
+  coordinates: { x: number; y: number };
+  size: number;
+  currentClick: string;
+  charactersToFind: string[];
+  setCharactersToFind: React.Dispatch<React.SetStateAction<string[]>>;
+  setShowSelector: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowZoomer: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function Selector({
   coordinates,
   size,
   currentClick,
@@ -11,8 +20,8 @@ function Selector({
   setCharactersToFind,
   setShowSelector,
   setShowZoomer,
-}) {
-  function checkGuess(buttonCharacter) {
+}: SelectorProps) {
+  function checkGuess(buttonCharacter: string) {
     if (currentClick === buttonCharacter) {
       if (charactersToFind.includes(currentClick)) {
         // Change game state after delay to be able to show good guess button background
@@ -51,15 +60,3 @@ function Selector({
     </>
   );
 }
-
-Selector.propTypes = {
-  coordinates: PropTypes.object,
-  size: PropTypes.number,
-  currentClick: PropTypes.string,
-  charactersToFind: PropTypes.array,
-  setCharactersToFind: PropTypes.func,
-  setShowSelector: PropTypes.func,
-  setShowZoomer: PropTypes.func,
-};
-
-export default Selector;

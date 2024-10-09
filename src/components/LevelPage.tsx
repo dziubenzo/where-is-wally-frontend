@@ -1,20 +1,20 @@
-import { StyledLevelPage } from '../styles/LevelPage.styled';
 import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
+  ApiError,
+  characterButtonsData,
+  checkImageClick,
+  getCircleSize,
   getCoordinates,
   getSelectorPosition,
-  getCircleSize,
-  checkImageClick,
-  characterButtonsData,
-  ApiError,
 } from '../helpers';
+import { Level } from '../loaders';
+import { StyledLevelPage } from '../styles/LevelPage.styled';
+import CharacterMarker from './CharacterMarker';
+import GameOverModal from './GameOverModal';
+import HintMarker from './HintMarker';
 import Selector from './Selector';
 import Zoomer from './Zoomer';
-import { useLocation } from 'react-router-dom';
-import CharacterMarker from './CharacterMarker';
-import HintMarker from './HintMarker';
-import GameOverModal from './GameOverModal';
-import { Level } from '../loaders';
 
 type LevelState = { state: Level | undefined };
 
@@ -28,7 +28,7 @@ function LevelPage() {
   const { _id, url_parameter, image_url, characters } = state;
 
   const imageRef = useRef<HTMLImageElement>(null);
-  const startDateRef = useRef<number>();
+  const startDateRef = useRef(0);
 
   // Selector states
   const [selectorSize, setSelectorSize] = useState(0);
@@ -173,7 +173,7 @@ function LevelPage() {
       )}
       {showZoomer && (
         <Zoomer
-          imageUrl={image_url}
+          imageURL={image_url}
           urlParameter={url_parameter}
           coordinates={selectorPos}
           zoom={zoomPos}
@@ -196,7 +196,7 @@ function LevelPage() {
             character={character}
             imageRef={imageRef}
             showHints={showHints}
-            hintcolour={characterButtonsData[index].hintColour}
+            hintColour={characterButtonsData[index].hintColour}
             charactersToFind={charactersToFind}
           />
         );
