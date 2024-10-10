@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 
+export type ThemeObject = typeof darkTheme;
+
 type ThemeProps = {
   children: ReactNode;
 };
