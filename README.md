@@ -24,6 +24,7 @@ A Where's Wally app featuring 7 levels, image magnifying glass, level hints and 
 
 #### Frontend
 
+- TypeScript
 - React (Vite)
 - React Router
 - styled-components

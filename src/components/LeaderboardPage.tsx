@@ -20,8 +20,6 @@ export default function LeaderboardPage() {
   // State for displaying table data
   const [tableData, setTableData] = useState(players);
 
-  console.log(pressedButton);
-
   function handleLevelButtonClick(levelId: Level['_id']) {
     const [currentLevel] = levels.filter((level) => level._id === levelId);
     setHeading(`Level ${currentLevel.url_parameter} - ${currentLevel.name}`);
