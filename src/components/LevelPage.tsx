@@ -6,6 +6,7 @@ import {
   checkImageClick,
   getCircleSize,
   getCoordinates,
+  getImageCentrePos,
   getSelectorPosition,
 } from '../helpers';
 import type { Level } from '../loaders';
@@ -39,10 +40,7 @@ export default function LevelPage() {
 
   // Selector states
   const [selectorSize, setSelectorSize] = useState(0);
-  const [selectorPos, setSelectorPos] = useState<SelectorPos>({
-    x: 0,
-    y: 0,
-  });
+  const [selectorPos, setSelectorPos] = useState<SelectorPos>({ x: 0, y: 0 });
   const [showSelector, setShowSelector] = useState(false);
 
   // Magnifying glass states
@@ -75,6 +73,12 @@ export default function LevelPage() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
+  }, []);
+
+  // Place the selector circle right in the centre of the image upon component render and imageRef availability
+  useEffect(() => {
+    const centreCoords = getImageCentrePos(imageRef);
+    setSelectorPos(centreCoords);
   }, []);
 
   // Update timer every 10 ms as long as there are characters to find
