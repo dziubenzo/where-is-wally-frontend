@@ -8,6 +8,7 @@ type SelectorProps = {
   size: number;
   currentClick: string;
   charactersToFind: string[];
+  showSelector: boolean;
   setCharactersToFind: React.Dispatch<React.SetStateAction<string[]>>;
   setShowSelector: React.Dispatch<React.SetStateAction<boolean>>;
   setShowZoomer: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,6 +19,7 @@ export default function Selector({
   size,
   currentClick,
   charactersToFind,
+  showSelector,
   setCharactersToFind,
   setShowSelector,
   setShowZoomer,
@@ -45,7 +47,10 @@ export default function Selector({
   return (
     <>
       <StyledSelector coordinates={coordinates} size={size}></StyledSelector>
-      <StyledMenu coordinates={coordinates}>
+      <StyledMenu
+        className={showSelector ? 'show' : 'hide'}
+        coordinates={coordinates}
+      >
         {characterButtonsData.map((character, index) => {
           return (
             <SelectorButton

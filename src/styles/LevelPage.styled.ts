@@ -158,6 +158,17 @@ export const StyledMenu = styled.div.attrs<StyledMenuProps>((props) => ({
   gap: 16px;
   background-color: transparent;
   z-index: 1;
+  transition: all 0.15s ease-in-out;
+
+  &.show {
+    visibility: visible;
+    transform: scale(1);
+  }
+
+  &.hide {
+    visibility: hidden;
+    transform: scale(0);
+  }
 `;
 
 export const StyledSelectorButton = styled.button`

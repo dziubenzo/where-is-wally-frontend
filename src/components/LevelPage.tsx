@@ -170,17 +170,16 @@ export default function LevelPage() {
         onMouseEnter={handleImageEnter}
         onMouseMove={showZoomer ? handleImageHover : undefined}
       />
-      {showSelector && (
-        <Selector
-          coordinates={selectorPos}
-          size={selectorSize}
-          currentClick={currentClick}
-          charactersToFind={charactersToFind}
-          setCharactersToFind={setCharactersToFind}
-          setShowSelector={setShowSelector}
-          setShowZoomer={setShowZoomer}
-        />
-      )}
+      <Selector
+        coordinates={selectorPos}
+        size={selectorSize}
+        currentClick={currentClick}
+        charactersToFind={charactersToFind}
+        showSelector={showSelector}
+        setCharactersToFind={setCharactersToFind}
+        setShowSelector={setShowSelector}
+        setShowZoomer={setShowZoomer}
+      />
       {showZoomer && (
         <Zoomer
           imageURL={image_url}
