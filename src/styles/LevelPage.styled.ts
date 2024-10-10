@@ -158,6 +158,7 @@ export const StyledMenu = styled.div.attrs<StyledMenuProps>((props) => ({
   gap: 16px;
   background-color: transparent;
   z-index: 1;
+  transform-origin: top;
   transition: all 0.15s ease-in-out;
 
   &.show {
@@ -217,6 +218,20 @@ export const StyledZoomer = styled.div.attrs<StyledZoomerProps>((props) => ({
   border-radius: 32px;
   pointer-events: none;
   z-index: 1;
+  transform-origin: bottom right;
+  transition:
+    transform 0.15s ease-in-out,
+    visibility 0.15s ease-in-out;
+
+  &.show {
+    visibility: visible;
+    transform: scale(1);
+  }
+
+  &.hide {
+    visibility: hidden;
+    transform: scale(0);
+  }
 
   @media (width <= ${(props) => props.theme.mobile}) {
     display: none !important;

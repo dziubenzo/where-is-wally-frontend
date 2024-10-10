@@ -7,6 +7,7 @@ type ZoomerProps = {
   urlParameter: Level['url_parameter'];
   coordinates: SelectorPos;
   zoom: ZoomPos;
+  showZoomer: boolean;
 };
 
 export default function Zoomer({
@@ -14,9 +15,13 @@ export default function Zoomer({
   urlParameter,
   coordinates,
   zoom,
+  showZoomer,
 }: ZoomerProps) {
   return (
-    <StyledZoomer coordinates={coordinates}>
+    <StyledZoomer
+      className={showZoomer ? 'show' : 'hide'}
+      coordinates={coordinates}
+    >
       <MagnifiedImage
         src={imageURL}
         alt={`Magnifying Glass for Where's Wally Image - Level ${urlParameter}`}

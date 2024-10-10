@@ -184,14 +184,13 @@ export default function LevelPage() {
         setShowSelector={setShowSelector}
         setShowZoomer={setShowZoomer}
       />
-      {showZoomer && (
-        <Zoomer
-          imageURL={image_url}
-          urlParameter={url_parameter}
-          coordinates={selectorPos}
-          zoom={zoomPos}
-        />
-      )}
+      <Zoomer
+        imageURL={image_url}
+        urlParameter={url_parameter}
+        coordinates={selectorPos}
+        zoom={zoomPos}
+        showZoomer={showZoomer}
+      />
       {characters.map((character, index) => {
         return (
           <CharacterMarker
