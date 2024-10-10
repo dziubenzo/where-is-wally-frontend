@@ -1,15 +1,31 @@
-import { createGlobalStyle } from 'styled-components';
+import * as styled from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = styled.createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-style: normal;
     background-color: ${(props) => props.theme.colours.background};
     color: ${(props) => props.theme.colours.primary};
+
+    @supports (scrollbar-width: auto) {
+      scrollbar-color: ${(props) => props.theme.colours.primary}
+        ${(props) => props.theme.colours.background};
+      scrollbar-width: scroll;
+    }
+
+    @supports selector(::-webkit-scrollbar) {
+      &::-webkit-scrollbar-thumb {
+        background: ${(props) => props.theme.colours.primary};
+      }
+
+      &::-webkit-scrollbar-track {
+        background: ${(props) => props.theme.colours.background};
+      }
+    }
   }
 
   *:focus-visible {
@@ -19,6 +35,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     display: flex;
     justify-content: center;
+    overflow-y: scroll;
   }
 
   #root {
