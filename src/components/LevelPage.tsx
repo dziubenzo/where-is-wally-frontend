@@ -7,6 +7,7 @@ import {
   getCircleSize,
   getCoordinates,
   getSelectorPosition,
+  isSelector,
 } from '../helpers';
 import type { Level } from '../loaders';
 import { StyledLevelPage } from '../styles/LevelPage.styled';
@@ -119,31 +120,26 @@ export default function LevelPage() {
   }
 
   // Hide zoomer on mouse image leave
-  // Hide selector circle if the mouse leaves the image, but keep showing it if the target is the Selector component
+  // Hide the entire selector if the cursor leaves the image, but keep showing it if the target is the Selector component
   function handleImageLeave(
     event: React.MouseEvent<HTMLImageElement, MouseEvent>,
   ) {
     setShowZoomer(false);
-    if (
-      event.relatedTarget instanceof Element &&
-      (event.relatedTarget.hasAttribute('coordinates') ||
-        event.relatedTarget.localName === 'img')
-    ) {
-      return;
-    }
+
+    if (isSelector(event)) return;
+
     setShowSelectorCircle(false);
+    setShowSelectorMenu(false);
   }
 
+  // Show zoomer and selector circle on mouse image enter
+  // Do not show zoomer if the cursor enters the image from the Selector component
   function handleImageEnter(
     event: React.MouseEvent<HTMLImageElement, MouseEvent>,
   ) {
-    // Hide selector only when img is entered from the "outside", i.e. not when you enter img from selector buttons
-    if (
-      event.relatedTarget instanceof Element &&
-      (event.relatedTarget instanceof Window ||
-        event.relatedTarget.className === 'game-info' ||
-        event.relatedTarget.localName === 'main')
-    ) {
+    if (isSelector(event)) return;
+
+    if (event.target === imageRef.current) {
       setShowZoomer(true);
       setShowSelectorCircle(true);
       setShowSelectorMenu(false);

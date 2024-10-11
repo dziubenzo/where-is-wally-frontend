@@ -183,3 +183,14 @@ export const getShifts = (imageRef: RefObject<HTMLImageElement>) => {
   const shiftY = getRandomInteger((sizeY * SHIFT_PERCENT) / 100);
   return { shiftX, shiftY };
 };
+
+// Check if the relatedTarget element is the Selector component
+export const isSelector = (
+  event: React.MouseEvent<HTMLImageElement, MouseEvent>,
+) => {
+  return (
+    event.relatedTarget instanceof Element &&
+    (event.relatedTarget.hasAttribute('coordinates') ||
+      event.relatedTarget.localName === 'img')
+  );
+};
