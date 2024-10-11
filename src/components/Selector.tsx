@@ -1,16 +1,16 @@
 import { characterButtonsData } from '../helpers';
 import { StyledSelector, StyledSelectorMenu } from '../styles/LevelPage.styled';
-import type { SelectorPos } from './LevelPage';
+import type { CharacterName, CharactersToFind, SelectorPos } from './LevelPage';
 import SelectorButton from './SelectorButton';
 
 type SelectorProps = {
   coordinates: SelectorPos;
   size: number;
   currentClick: string;
-  charactersToFind: string[];
+  charactersToFind: CharactersToFind;
   showSelectorMenu: boolean;
   showSelectorCircle: boolean;
-  setCharactersToFind: React.Dispatch<React.SetStateAction<string[]>>;
+  setCharactersToFind: React.Dispatch<React.SetStateAction<CharactersToFind>>;
   setShowSelectorMenu: React.Dispatch<React.SetStateAction<boolean>>;
   setShowSelectorCircle: React.Dispatch<React.SetStateAction<boolean>>;
   setShowZoomer: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,7 +28,7 @@ export default function Selector({
   setShowSelectorCircle,
   setShowZoomer,
 }: SelectorProps) {
-  function checkGuess(buttonCharacter: string) {
+  function checkGuess(buttonCharacter: CharacterName) {
     if (currentClick === buttonCharacter) {
       if (charactersToFind.includes(currentClick)) {
         // Change game state after delay to be able to show good guess button background

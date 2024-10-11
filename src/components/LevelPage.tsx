@@ -24,7 +24,11 @@ export type SelectorPos = {
   y: number;
 };
 
-export type ZoomPos = { percentX: number; percentY: number };
+export type ZoomerPos = { percentX: number; percentY: number };
+
+export type CharacterName = 'wally' | 'wenda' | 'wizard' | 'odlaw';
+
+export type CharactersToFind = CharacterName[];
 
 export default function LevelPage() {
   // Get level from Link prop
@@ -44,12 +48,15 @@ export default function LevelPage() {
   const [showSelectorMenu, setShowSelectorMenu] = useState(false);
   const [showSelectorCircle, setShowSelectorCircle] = useState(false);
 
-  // Magnifying glass states
+  // Zoomer states
   const [showZoomer, setShowZoomer] = useState(false);
-  const [zoomPos, setZoomPos] = useState<ZoomPos>({ percentX: 0, percentY: 0 });
+  const [zoomerPos, setZoomerPos] = useState<ZoomerPos>({
+    percentX: 0,
+    percentY: 0,
+  });
 
   // Game flow states
-  const [charactersToFind, setCharactersToFind] = useState<string[]>([
+  const [charactersToFind, setCharactersToFind] = useState<CharactersToFind>([
     'wally',
     'wenda',
     'wizard',
@@ -116,7 +123,7 @@ export default function LevelPage() {
     // Get precise percent values of large image for smooth zooming
     const { percentX, percentY } = getCoordinates(imageRef, event, true);
     // Update zoom
-    setZoomPos({ percentX, percentY });
+    setZoomerPos({ percentX, percentY });
   }
 
   // Hide zoomer on mouse image leave
@@ -193,7 +200,7 @@ export default function LevelPage() {
         imageURL={image_url}
         urlParameter={url_parameter}
         coordinates={selectorPos}
-        zoom={zoomPos}
+        zoomer={zoomerPos}
         showZoomer={showZoomer}
       />
       {characters.map((character, index) => {

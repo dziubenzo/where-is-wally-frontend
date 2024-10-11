@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import type { CharacterButton } from '../helpers';
 import { StyledSelectorButton } from '../styles/LevelPage.styled';
-import { CharacterButton } from '../helpers';
+import type { CharacterName, CharactersToFind } from './LevelPage';
 
 type SelectorButtonProps = {
-  charactersToFind: string[];
+  charactersToFind: CharactersToFind;
   character: CharacterButton;
-  checkGuess: (buttonCharacter: string) => boolean;
+  checkGuess: (buttonCharacter: CharacterName) => boolean;
 };
 
 export default function SelectorButton({
@@ -20,7 +21,8 @@ export default function SelectorButton({
   const [badGuess, setBadGuess] = useState(false);
 
   // Get character name from alt
-  const characterName = alt.split(' ')[0].toLowerCase();
+  // Use type casting due to the way Array.prototype.includes works with TS
+  const characterName = alt.split(' ')[0].toLowerCase() as CharacterName;
 
   // Manipulate background colour of button depending on guess
   const changeBackground = goodGuess

@@ -1,8 +1,9 @@
 import { RefObject, useEffect, useState } from 'react';
 import { CharacterButton, getHintMarkerPos, getHintSize } from '../helpers';
-import { Character } from '../loaders';
+import type { Character } from '../loaders';
 import { StyledHintMarker } from '../styles/LevelPage.styled';
-import type { PixelCoords } from './CharacterMarker';
+import type { MarkerPos } from './CharacterMarker';
+import type { CharactersToFind } from './LevelPage';
 
 type HintMarkerProps = {
   character:
@@ -13,7 +14,7 @@ type HintMarkerProps = {
   imageRef: RefObject<HTMLImageElement>;
   showHints: boolean;
   hintColour: CharacterButton['hintColour'];
-  charactersToFind: string[];
+  charactersToFind: CharactersToFind;
 };
 
 export type HintSize = {
@@ -31,7 +32,7 @@ export default function HintMarker({
   const { x, y, name } = character;
 
   // States for pixel coordinates and size of hint marker
-  const [pixelCoordinates, setPixelCoordinates] = useState<PixelCoords>({
+  const [pixelCoordinates, setPixelCoordinates] = useState<MarkerPos>({
     pixelX: 0,
     pixelY: 0,
   });

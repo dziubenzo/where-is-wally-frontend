@@ -1,12 +1,12 @@
 import { Level } from '../loaders';
 import { MagnifiedImage, StyledZoomer } from '../styles/LevelPage.styled';
-import type { SelectorPos, ZoomPos } from './LevelPage';
+import type { SelectorPos, ZoomerPos } from './LevelPage';
 
 type ZoomerProps = {
   imageURL: Level['image_url'];
   urlParameter: Level['url_parameter'];
   coordinates: SelectorPos;
-  zoom: ZoomPos;
+  zoomer: ZoomerPos;
   showZoomer: boolean;
 };
 
@@ -14,7 +14,7 @@ export default function Zoomer({
   imageURL,
   urlParameter,
   coordinates,
-  zoom,
+  zoomer,
   showZoomer,
 }: ZoomerProps) {
   return (
@@ -25,7 +25,7 @@ export default function Zoomer({
       <MagnifiedImage
         src={imageURL}
         alt={`Magnifying Glass for Where's Wally Image - Level ${urlParameter}`}
-        zoom={zoom}
+        zoomer={zoomer}
       />
     </StyledZoomer>
   );

@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import type { SelectorPos, ZoomPos } from '../components/LevelPage';
-import type { PixelCoords } from '../components/CharacterMarker';
+import type { MarkerPos } from '../components/CharacterMarker';
 import type { HintSize } from '../components/HintMarker';
+import type { SelectorPos, ZoomerPos } from '../components/LevelPage';
 import type { CharacterButton } from '../helpers';
 
 type StyledCharacterMarkerProps = {
-  position: PixelCoords;
+  position: MarkerPos;
   size: number;
 };
 
 type StyledHintMarkerProps = {
-  position: PixelCoords;
+  position: MarkerPos;
   size: HintSize;
   hintcolour: CharacterButton['hintColour'];
 };
@@ -27,7 +27,7 @@ type StyledMenuProps = {
 type StyledZoomerProps = StyledMenuProps;
 
 type MagnifiedImageProps = {
-  zoom: ZoomPos;
+  zoomer: ZoomerPos;
 };
 
 export const StyledLevelPage = styled.main`
@@ -228,10 +228,10 @@ export const StyledSelectorButton = styled.button`
     height: 15vw;
 
     img {
-    height: revert;
-    background: transparent;
-    cursor: pointer;
-  }
+      height: revert;
+      background: transparent;
+      cursor: pointer;
+    }
   }
 `;
 
@@ -269,7 +269,7 @@ export const StyledZoomer = styled.div.attrs<StyledZoomerProps>((props) => ({
 export const MagnifiedImage = styled.img.attrs<MagnifiedImageProps>(
   (props) => ({
     style: {
-      transformOrigin: `${props.zoom.percentX}% ${props.zoom.percentY}%`,
+      transformOrigin: `${props.zoomer.percentX}% ${props.zoomer.percentY}%`,
     },
   }),
 )`

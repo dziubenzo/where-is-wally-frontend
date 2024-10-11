@@ -1,10 +1,11 @@
 import { RefObject, useEffect, useState } from 'react';
 import { getCharacterMarkerPos, getCircleSize } from '../helpers';
-import { Character } from '../loaders';
+import type { Character } from '../loaders';
 import { StyledCharacterMarker } from '../styles/LevelPage.styled';
+import type { CharactersToFind } from './LevelPage';
 
 type CharacterMarkerProps = {
-  charactersToFind: string[];
+  charactersToFind: CharactersToFind;
   character:
     | Character<'wally'>
     | Character<'wenda'>
@@ -13,7 +14,7 @@ type CharacterMarkerProps = {
   imageRef: RefObject<HTMLImageElement>;
 };
 
-export type PixelCoords = {
+export type MarkerPos = {
   pixelX: number;
   pixelY: number;
 };
@@ -26,7 +27,7 @@ export default function CharacterMarker({
   const { name, x, y } = character;
 
   // States for pixel coordinates and size of character marker
-  const [pixelCoordinates, setPixelCoordinates] = useState<PixelCoords>({
+  const [pixelCoordinates, setPixelCoordinates] = useState<MarkerPos>({
     pixelX: 0,
     pixelY: 0,
   });
