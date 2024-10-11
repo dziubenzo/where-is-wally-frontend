@@ -110,6 +110,15 @@ export const StyledSelector = styled.div.attrs<StyledSelectorProps>(
   border: 3px dashed ${(props) => props.theme.colours.primary};
   pointer-events: none;
   z-index: 1;
+  transition: transform 0.15s ease-in-out;
+
+  &.show {
+    transform: scale(1);
+  }
+
+  &.hide {
+    transform: scale(0);
+  }
 `;
 
 export const StyledCharacterMarker = styled.div.attrs<StyledCharacterMarkerProps>(

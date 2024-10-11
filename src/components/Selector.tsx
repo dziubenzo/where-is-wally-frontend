@@ -8,9 +8,11 @@ type SelectorProps = {
   size: number;
   currentClick: string;
   charactersToFind: string[];
-  showSelector: boolean;
+  showSelectorMenu: boolean;
+  showSelectorCircle: boolean;
   setCharactersToFind: React.Dispatch<React.SetStateAction<string[]>>;
-  setShowSelector: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowSelectorMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowSelectorCircle: React.Dispatch<React.SetStateAction<boolean>>;
   setShowZoomer: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -19,9 +21,11 @@ export default function Selector({
   size,
   currentClick,
   charactersToFind,
-  showSelector,
+  showSelectorMenu,
+  showSelectorCircle,
   setCharactersToFind,
-  setShowSelector,
+  setShowSelectorMenu,
+  setShowSelectorCircle,
   setShowZoomer,
 }: SelectorProps) {
   function checkGuess(buttonCharacter: string) {
@@ -30,13 +34,14 @@ export default function Selector({
         // Change game state after delay to be able to show good guess button background
         // Hide selector and show zoomer
         setTimeout(() => {
-          setCharactersToFind(
+          setCharactersToFind(() =>
             charactersToFind.filter((character) => character !== currentClick),
           );
-          setShowSelector(false);
-          // Show zoomer as long as there are at least 2 characters to find
-          if (charactersToFind.length !== 1) {
+          setShowSelectorMenu(false);
+          // Show zoomer and selector circle as long as there are characters to find
+          if (charactersToFind.length !== 0) {
             setShowZoomer(true);
+            setShowSelectorCircle(true);
           }
         }, 500);
         return false;
@@ -46,9 +51,13 @@ export default function Selector({
   }
   return (
     <>
-      <StyledSelector coordinates={coordinates} size={size}></StyledSelector>
+      <StyledSelector
+        className={showSelectorCircle ? 'show' : 'hide'}
+        coordinates={coordinates}
+        size={size}
+      ></StyledSelector>
       <StyledMenu
-        className={showSelector ? 'show' : 'hide'}
+        className={showSelectorMenu ? 'show' : 'hide'}
         coordinates={coordinates}
       >
         {characterButtonsData.map((character, index) => {
@@ -56,8 +65,7 @@ export default function Selector({
             <SelectorButton
               key={index}
               charactersToFind={charactersToFind}
-              imageURL={character.imageURL}
-              alt={character.alt}
+              character={character}
               checkGuess={checkGuess}
             ></SelectorButton>
           );

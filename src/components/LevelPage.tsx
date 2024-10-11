@@ -6,7 +6,6 @@ import {
   checkImageClick,
   getCircleSize,
   getCoordinates,
-  getImageCentrePos,
   getSelectorPosition,
 } from '../helpers';
 import type { Level } from '../loaders';
@@ -41,7 +40,8 @@ export default function LevelPage() {
   // Selector states
   const [selectorSize, setSelectorSize] = useState(0);
   const [selectorPos, setSelectorPos] = useState<SelectorPos>({ x: 0, y: 0 });
-  const [showSelector, setShowSelector] = useState(false);
+  const [showSelectorMenu, setShowSelectorMenu] = useState(false);
+  const [showSelectorCircle, setShowSelectorCircle] = useState(false);
 
   // Magnifying glass states
   const [showZoomer, setShowZoomer] = useState(false);
@@ -65,7 +65,7 @@ export default function LevelPage() {
   // Hide selector and calculate its size whenever browser is resized
   useEffect(() => {
     function handleResize() {
-      setShowSelector(false);
+      setShowSelectorMenu(false);
       setSelectorSize(getCircleSize(imageRef));
     }
     setSelectorSize(getCircleSize(imageRef));
@@ -73,12 +73,6 @@ export default function LevelPage() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
-
-  // Place the selector circle right in the centre of the image upon component render and imageRef availability
-  useEffect(() => {
-    const centreCoords = getImageCentrePos(imageRef);
-    setSelectorPos(centreCoords);
   }, []);
 
   // Update timer every 10 ms as long as there are characters to find
@@ -105,10 +99,10 @@ export default function LevelPage() {
     // Calculate selector position
     const newSelectorPos = getSelectorPosition(imageRef, event);
     // Show zoomer again if selector is to be hidden
-    if (!showZoomer && showSelector) {
+    if (!showZoomer && showSelectorMenu) {
       setShowZoomer(true);
     }
-    setShowSelector(!showSelector);
+    setShowSelectorMenu(!showSelectorMenu);
     setSelectorPos(newSelectorPos);
   }
 
@@ -124,8 +118,20 @@ export default function LevelPage() {
     setZoomPos({ percentX, percentY });
   }
 
-  function handleImageLeave() {
+  // Hide zoomer on mouse image leave
+  // Hide selector circle if the mouse leaves the image, but keep showing it if the target is the Selector component
+  function handleImageLeave(
+    event: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  ) {
     setShowZoomer(false);
+    if (
+      event.relatedTarget instanceof Element &&
+      (event.relatedTarget.hasAttribute('coordinates') ||
+        event.relatedTarget.localName === 'img')
+    ) {
+      return;
+    }
+    setShowSelectorCircle(false);
   }
 
   function handleImageEnter(
@@ -135,11 +141,12 @@ export default function LevelPage() {
     if (
       event.relatedTarget instanceof Element &&
       (event.relatedTarget instanceof Window ||
-        event.relatedTarget?.className === 'game-info' ||
-        event.relatedTarget?.localName === 'main')
+        event.relatedTarget.className === 'game-info' ||
+        event.relatedTarget.localName === 'main')
     ) {
       setShowZoomer(true);
-      setShowSelector(false);
+      setShowSelectorCircle(true);
+      setShowSelectorMenu(false);
     }
   }
 
@@ -179,9 +186,11 @@ export default function LevelPage() {
         size={selectorSize}
         currentClick={currentClick}
         charactersToFind={charactersToFind}
-        showSelector={showSelector}
+        showSelectorMenu={showSelectorMenu}
+        showSelectorCircle={showSelectorCircle}
         setCharactersToFind={setCharactersToFind}
-        setShowSelector={setShowSelector}
+        setShowSelectorMenu={setShowSelectorMenu}
+        setShowSelectorCircle={setShowSelectorCircle}
         setShowZoomer={setShowZoomer}
       />
       <Zoomer

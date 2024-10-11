@@ -4,17 +4,17 @@ import { CharacterButton } from '../helpers';
 
 type SelectorButtonProps = {
   charactersToFind: string[];
-  imageURL: CharacterButton['imageURL'];
-  alt: CharacterButton['alt'];
+  character: CharacterButton;
   checkGuess: (buttonCharacter: string) => boolean;
 };
 
 export default function SelectorButton({
   charactersToFind,
-  imageURL,
-  alt,
+  character,
   checkGuess,
 }: SelectorButtonProps) {
+  const { imageURL, alt } = character;
+
   // State for giving user feedback on button click
   const [goodGuess, setGoodGuess] = useState(false);
   const [badGuess, setBadGuess] = useState(false);

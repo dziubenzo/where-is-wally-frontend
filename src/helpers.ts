@@ -183,22 +183,3 @@ export const getShifts = (imageRef: RefObject<HTMLImageElement>) => {
   const shiftY = getRandomInteger((sizeY * SHIFT_PERCENT) / 100);
   return { shiftX, shiftY };
 };
-
-// Get the dead centre coordinates of the image relative to the entire page
-// Take into account selector size and scroll values if any
-export const getImageCentrePos = (imageRef: RefObject<HTMLImageElement>) => {
-  if (imageRef.current) {
-    const x =
-      imageRef.current.getBoundingClientRect().left +
-      imageRef.current.getBoundingClientRect().width / 2 +
-      window.scrollX -
-      getCircleSize(imageRef) / 2;
-    const y =
-      imageRef.current.getBoundingClientRect().top +
-      imageRef.current.getBoundingClientRect().height / 2 +
-      window.scrollY -
-      getCircleSize(imageRef) / 2;
-    return { x, y };
-  }
-  return { x: 0, y: 0 };
-};
