@@ -154,12 +154,14 @@ export const StyledHintMarker = styled.div.attrs<StyledHintMarkerProps>(
   pointer-events: none;
 `;
 
-export const StyledMenu = styled.div.attrs<StyledMenuProps>((props) => ({
-  style: {
-    top: `${props.coordinates.y + 40}px`,
-    left: `${props.coordinates.x - 185}px`,
-  },
-}))`
+export const StyledSelectorMenu = styled.div.attrs<StyledMenuProps>(
+  (props) => ({
+    style: {
+      top: `${props.coordinates.y + 40}px`,
+      left: `${props.coordinates.x - 185}px`,
+    },
+  }),
+)`
   width: 400px;
   position: absolute;
   display: flex;
@@ -176,6 +178,18 @@ export const StyledMenu = styled.div.attrs<StyledMenuProps>((props) => ({
 
   &.hide {
     transform: scale(0);
+  }
+
+  @media (width <= ${(props) => props.theme.mobile}) {
+    position: relative;
+    top: 0 !important;
+    left: 0 !important;
+    width: revert;
+    max-width: 100vw;
+
+    &.hide {
+      transform: scale(1);
+    }
   }
 `;
 
@@ -207,6 +221,17 @@ export const StyledSelectorButton = styled.button`
         transform: scale(1.5);
       }
     }
+  }
+
+  @media (width <= ${(props) => props.theme.mobile}) {
+    width: 15vw;
+    height: 15vw;
+
+    img {
+    height: revert;
+    background: transparent;
+    cursor: pointer;
+  }
   }
 `;
 
@@ -363,7 +388,7 @@ export const StyledGameOverModal = styled.dialog`
   @media (width <= ${(props) => props.theme.mobile}) {
     &[open] {
       width: calc(100% - 1em);
-      height: 60%;
+      height: 70%;
     }
 
     .navigation-btns {

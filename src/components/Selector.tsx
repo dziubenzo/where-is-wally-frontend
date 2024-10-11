@@ -1,5 +1,5 @@
 import { characterButtonsData } from '../helpers';
-import { StyledMenu, StyledSelector } from '../styles/LevelPage.styled';
+import { StyledSelector, StyledSelectorMenu } from '../styles/LevelPage.styled';
 import type { SelectorPos } from './LevelPage';
 import SelectorButton from './SelectorButton';
 
@@ -56,7 +56,7 @@ export default function Selector({
         coordinates={coordinates}
         size={size}
       ></StyledSelector>
-      <StyledMenu
+      <StyledSelectorMenu
         className={showSelectorMenu ? 'show' : 'hide'}
         coordinates={coordinates}
       >
@@ -70,7 +70,7 @@ export default function Selector({
             ></SelectorButton>
           );
         })}
-      </StyledMenu>
+      </StyledSelectorMenu>
     </>
   );
 }

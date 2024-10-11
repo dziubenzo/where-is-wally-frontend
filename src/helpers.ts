@@ -44,13 +44,16 @@ export const getSelectorPosition = (
   return { x, y };
 };
 
-// Calculate selector/character marker size based on image height
-// Use default value for selector
+// Calculate selector circle/character marker size based on image height
+// Use default value for selector circle
+// Use a higher value for mobile-like viewport widths
 export const getCircleSize = (
   imageRef: RefObject<HTMLImageElement>,
   percent: number = 5,
 ) => {
-  const PERCENT_OF_IMAGE_HEIGHT = percent;
+  const PERCENT_OF_IMAGE_HEIGHT_MOBILE = 10;
+  const PERCENT_OF_IMAGE_HEIGHT =
+    window.innerHeight > 768 ? percent : PERCENT_OF_IMAGE_HEIGHT_MOBILE;
   const { height } = imageRef.current!.getBoundingClientRect();
   return Math.round((height * PERCENT_OF_IMAGE_HEIGHT) / 100);
 };
