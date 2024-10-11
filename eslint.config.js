@@ -24,6 +24,7 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       'no-console': 'error',
+      'no-unused-vars': 'off', // ts does this already
     },
   },
 );

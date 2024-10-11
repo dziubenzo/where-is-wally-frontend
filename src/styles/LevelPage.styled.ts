@@ -168,15 +168,13 @@ export const StyledMenu = styled.div.attrs<StyledMenuProps>((props) => ({
   background-color: transparent;
   z-index: 1;
   transform-origin: top;
-  transition: all 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out;
 
   &.show {
-    visibility: visible;
     transform: scale(1);
   }
 
   &.hide {
-    visibility: hidden;
     transform: scale(0);
   }
 `;
@@ -228,17 +226,13 @@ export const StyledZoomer = styled.div.attrs<StyledZoomerProps>((props) => ({
   pointer-events: none;
   z-index: 1;
   transform-origin: bottom right;
-  transition:
-    transform 0.15s ease-in-out,
-    visibility 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out;
 
   &.show {
-    visibility: visible;
     transform: scale(1);
   }
 
   &.hide {
-    visibility: hidden;
     transform: scale(0);
   }
 
