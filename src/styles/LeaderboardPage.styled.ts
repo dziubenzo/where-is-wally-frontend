@@ -13,14 +13,14 @@ export const StyledLeaderboardPage = styled.main`
 
   .level-buttons {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
   }
 `;
 
 export const LevelButton = styled.button<LevelButtonProps>`
-  max-width: 175px;
+  width: max-content;
   padding: 0.5em 1em;
   font-size: ${(props) => props.theme.fontSizes.medium};
   background-color: ${(props) =>
@@ -50,15 +50,15 @@ export const LevelButton = styled.button<LevelButtonProps>`
   }
 
   @media (width <= ${(props) => props.theme.mobile}) {
-    max-width: 125px;
-    font-size: 1rem;
+    width: 75px;
+    font-size: ${(props) => props.theme.fontSizes.small};
     padding: 0.5em;
   }
 `;
 
 export const StyledLeaderboardTable = styled.table`
   align-self: center;
-  max-width: 80%;
+  width: 80%;
 
   th {
     font-weight: 600;
@@ -75,7 +75,7 @@ export const StyledLeaderboardTable = styled.table`
   }
 
   .nickname-column {
-    width: 12ch;
+    width: 18ch;
   }
 
   .level-column {
@@ -91,12 +91,20 @@ export const StyledLeaderboardTable = styled.table`
   }
 
   @media (width <= ${(props) => props.theme.mobile}) {
-    max-width: 100%;
+    width: 100%;
 
     th,
     td {
-      font-size: ${(props) => props.theme.fontSizes.small};
+      font-size: 0.6rem;
       padding: 0.5em 0.25em;
+    }
+
+    .nickname-column {
+      width: 14ch;
+    }
+
+    .level-column {
+      width: 10ch;
     }
   }
 `;
