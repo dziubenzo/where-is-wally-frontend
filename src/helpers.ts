@@ -171,10 +171,18 @@ export const getHintMarkerPos = (
 };
 
 // Generate a random integer between -number and number
-export const getRandomInteger = (integer: number) => {
+export const getRandomIntegerWithNegatives = (integer: number) => {
   const min = integer - integer * 2;
   const max = integer;
   return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+// Generate random hint character position along the width of the hint marker
+// Avoid values close to the start and end of the width due to the rounded corners of the hint marker
+export const getHintCharacterPos = (hintMarkerWidth: number) => {
+  const min = Math.ceil(10);
+  const max = Math.floor(hintMarkerWidth - hintMarkerWidth / 5);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 // Generate random shifts of the max value of SHIFT_PERCENT (25% seems OK) of the hint marker width/height in both x and y directions
@@ -182,8 +190,8 @@ export const getRandomInteger = (integer: number) => {
 export const getShifts = (imageRef: RefObject<HTMLImageElement>) => {
   const SHIFT_PERCENT = 25;
   const { sizeX, sizeY } = getHintSize(imageRef);
-  const shiftX = getRandomInteger((sizeX * SHIFT_PERCENT) / 100);
-  const shiftY = getRandomInteger((sizeY * SHIFT_PERCENT) / 100);
+  const shiftX = getRandomIntegerWithNegatives((sizeX * SHIFT_PERCENT) / 100);
+  const shiftY = getRandomIntegerWithNegatives((sizeY * SHIFT_PERCENT) / 100);
   return { shiftX, shiftY };
 };
 

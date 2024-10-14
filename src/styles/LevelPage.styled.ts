@@ -13,6 +13,7 @@ type StyledHintMarkerProps = {
   position: MarkerPos;
   size: HintSize;
   hintcolour: CharacterButton['hintColour'];
+  hintcharpos: HintSize['sizeX'];
 };
 
 type StyledSelectorProps = {
@@ -119,6 +120,10 @@ export const StyledSelector = styled.div.attrs<StyledSelectorProps>(
   &.hide {
     transform: scale(0);
   }
+
+  @media (width <= ${(props) => props.theme.mobile}) {
+    border: 1px dashed ${(props) => props.theme.colours.primary};
+  }
 `;
 
 export const StyledCharacterMarker = styled.div.attrs<StyledCharacterMarkerProps>(
@@ -136,6 +141,10 @@ export const StyledCharacterMarker = styled.div.attrs<StyledCharacterMarkerProps
   height: ${(props) => props.size}px;
   border: 3px solid green;
   pointer-events: none;
+
+  @media (width <= ${(props) => props.theme.mobile}) {
+    border: 1px solid green;
+  }
 `;
 
 export const StyledHintMarker = styled.div.attrs<StyledHintMarkerProps>(
@@ -148,10 +157,25 @@ export const StyledHintMarker = styled.div.attrs<StyledHintMarkerProps>(
 )`
   position: absolute;
   background: transparent;
+  border-radius: 16px;
   width: ${(props) => props.size.sizeX}px;
   height: ${(props) => props.size.sizeY}px;
   border: 3px solid ${(props) => props.hintcolour};
   pointer-events: none;
+
+  img {
+    position: absolute;
+    background: transparent;
+    height: 70px;
+    width: 50px;
+    top: -72px;
+    left: ${(props) => props.hintcharpos}px;
+  }
+
+  @media (width <= ${(props) => props.theme.mobile}) {
+    border-radius: 8px;
+    border: 1px solid ${(props) => props.hintcolour};
+  }
 `;
 
 export const StyledSelectorMenu = styled.div.attrs<StyledMenuProps>(

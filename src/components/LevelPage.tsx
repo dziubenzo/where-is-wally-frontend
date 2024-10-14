@@ -86,14 +86,17 @@ export default function LevelPage() {
   // Update timer every 10 ms as long as there are characters to find
   // Set start date
   useEffect(() => {
+    let interval: NodeJS.Timeout;
+
     if (charactersToFind.length) {
-      setTimeout(() => {
+      interval = setInterval(() => {
         setTimer(timer + 0.01);
         if (!startDateRef.current) {
           startDateRef.current = Date.now();
         }
       }, 10);
     }
+    return () => clearInterval(interval);
   }, [charactersToFind, timer]);
 
   function handleImageClick(

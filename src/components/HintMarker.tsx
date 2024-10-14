@@ -1,5 +1,10 @@
 import { RefObject, useEffect, useState } from 'react';
-import { CharacterButton, getHintMarkerPos, getHintSize } from '../helpers';
+import {
+  CharacterButton,
+  getHintCharacterPos,
+  getHintMarkerPos,
+  getHintSize,
+} from '../helpers';
 import type { Character } from '../loaders';
 import { StyledHintMarker } from '../styles/LevelPage.styled';
 import type { MarkerPos } from './CharacterMarker';
@@ -40,6 +45,7 @@ export default function HintMarker({
     sizeX: 0,
     sizeY: 0,
   });
+  const [hintCharPos, setHintCharPos] = useState(0);
 
   useEffect(() => {
     function handleResize() {
@@ -56,6 +62,11 @@ export default function HintMarker({
     };
   }, [x, y, imageRef]);
 
+  // Set position of the hint character image once markerSize values are calculated
+  useEffect(() => {
+    setHintCharPos(getHintCharacterPos(markerSize.sizeX));
+  }, [markerSize]);
+
   return (
     <>
       {showHints && charactersToFind.includes(name) && (
@@ -63,7 +74,13 @@ export default function HintMarker({
           position={pixelCoordinates}
           size={markerSize}
           hintcolour={hintColour}
-        ></StyledHintMarker>
+          hintcharpos={hintCharPos}
+        >
+          <img
+            src={`/${name}-hint.png`}
+            alt={name[0].toUpperCase() + name.slice(1)}
+          />
+        </StyledHintMarker>
       )}
     </>
   );
