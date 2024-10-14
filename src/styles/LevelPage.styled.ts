@@ -168,13 +168,21 @@ export const StyledHintMarker = styled.div.attrs<StyledHintMarkerProps>(
     background: transparent;
     height: 70px;
     width: 50px;
-    top: -72px;
+    top: calc(-70px - 2px);
     left: ${(props) => props.hintcharpos}px;
+    border-radius: 0;
   }
 
   @media (width <= ${(props) => props.theme.mobile}) {
     border-radius: 8px;
     border: 1px solid ${(props) => props.hintcolour};
+
+    img {
+      height: ${(props) => props.size.sizeX / 6}px;
+      width: ${(props) => props.size.sizeX / 8}px;
+      top: -${(props) => props.size.sizeX / 6 + 1}px;
+      left: ${(props) => props.hintcharpos}px;
+    }
   }
 `;
 
