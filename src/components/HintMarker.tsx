@@ -1,4 +1,5 @@
 import { RefObject, useEffect, useState } from 'react';
+import { useTheme } from 'styled-components';
 import {
   CharacterButton,
   getHintCharacterPos,
@@ -35,6 +36,7 @@ export default function HintMarker({
   charactersToFind,
 }: HintMarkerProps) {
   const { x, y, name } = character;
+  const theme = useTheme();
 
   // States for pixel coordinates and size of hint marker
   const [pixelCoordinates, setPixelCoordinates] = useState<MarkerPos>({
@@ -48,21 +50,31 @@ export default function HintMarker({
   const [hintCharPos, setHintCharPos] = useState(0);
 
   useEffect(() => {
-    function handleResize() {
+    function placeAndResizeHints() {
       setPixelCoordinates(getHintMarkerPos(x, y, imageRef));
       setMarkerSize(getHintSize(imageRef));
+    }
+    function handleResize() {
+      if (window.innerWidth <= parseInt(theme.mobile)) return;
+      placeAndResizeHints();
+    }
+    function handleOrientationChange() {
+      if (window.innerWidth > parseInt(theme.mobile)) return;
+      placeAndResizeHints();
     }
     setTimeout(() => {
       setPixelCoordinates(getHintMarkerPos(x, y, imageRef));
     }, 0);
     setMarkerSize(getHintSize(imageRef));
     window.addEventListener('resize', handleResize);
+    screen.orientation.addEventListener('change', handleOrientationChange);
     return () => {
       window.removeEventListener('resize', handleResize);
+      screen.orientation.removeEventListener('change', handleOrientationChange);
     };
-  }, [x, y, imageRef]);
+  }, [x, y, theme.mobile, imageRef]);
 
-  // Set position of the hint character image once markerSize values are calculated
+  // Set position of the hint character image once markerSize values are calculated or change
   useEffect(() => {
     setHintCharPos(getHintCharacterPos(markerSize.sizeX));
   }, [markerSize]);

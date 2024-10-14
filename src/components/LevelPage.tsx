@@ -70,7 +70,7 @@ export default function LevelPage() {
   const [hintsUsed, setHintsUsed] = useState(false);
 
   // Calculate selector size upon component render
-  // Hide selector and calculate its size whenever browser is resized
+  // Hide selector and calculate its size whenever the screen is resized
   useEffect(() => {
     function handleResize() {
       setShowSelectorMenu(false);
