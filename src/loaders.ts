@@ -19,7 +19,6 @@ export type Level = {
     Character<'wizard'>,
     Character<'odlaw'>,
   ];
-  __v: number;
 };
 
 export type Player = {
@@ -30,13 +29,16 @@ export type Player = {
   end_date: Date;
   duration: number;
   hints_used: boolean;
-  __v: number;
+};
+
+export type LatestPlayer = Omit<Player, 'level'> & {
+  level: string;
 };
 
 export type HomePageLoader = {
   levelsCount: number;
   playersCount: number;
-  latestPlayer: Player;
+  latestPlayer: LatestPlayer;
 };
 
 export type LevelsPageLoader = Level[];
