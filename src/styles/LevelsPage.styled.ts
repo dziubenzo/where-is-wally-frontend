@@ -36,6 +36,7 @@ export const StyledLevelCard = styled.div`
   div {
     height: 100%;
     overflow: hidden;
+    border-radius: 0 0 8px 8px;
 
     a {
       text-decoration: none;
@@ -46,7 +47,6 @@ export const StyledLevelCard = styled.div`
       height: 100%;
       transform: scale(1.5);
       filter: contrast(1.2);
-      border-radius: 0 0 8px 8px;
     }
   }
 
