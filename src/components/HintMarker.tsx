@@ -81,8 +81,9 @@ export default function HintMarker({
 
   return (
     <>
-      {showHints && charactersToFind.includes(name) && (
+      {charactersToFind.includes(name) && (
         <StyledHintMarker
+          className={showHints ? 'show' : 'hide'}
           position={pixelCoordinates}
           size={markerSize}
           hintcolour={hintColour}

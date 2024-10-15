@@ -162,6 +162,15 @@ export const StyledHintMarker = styled.div.attrs<StyledHintMarkerProps>(
   height: ${(props) => props.size.sizeY}px;
   border: 3px solid ${(props) => props.hintcolour};
   pointer-events: none;
+  transition: transform 0.15s ease-in-out;
+
+  &.show {
+    transform: scale(1);
+  }
+
+  &.hide {
+    transform: scale(0);
+  }
 
   img {
     position: absolute;
