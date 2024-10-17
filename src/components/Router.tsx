@@ -1,15 +1,16 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ErrorPage from './ErrorPage';
-import HomePage from './HomePage';
-import App from './App';
-import LevelsPage from './LevelsPage';
-import LevelPage from './LevelPage';
-import LeaderboardPage from './LeaderboardPage';
 import {
   homePageLoader,
-  levelsPageLoader,
   leaderboardPageLoader,
+  levelPageLoader,
+  levelsPageLoader,
 } from '../loaders';
+import App from './App';
+import ErrorPage from './ErrorPage';
+import HomePage from './HomePage';
+import LeaderboardPage from './LeaderboardPage';
+import LevelPage from './LevelPage';
+import LevelsPage from './LevelsPage';
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -35,6 +36,7 @@ export default function Router() {
         {
           path: 'levels/:id',
           element: <LevelPage />,
+          loader: levelPageLoader,
         },
         {
           path: 'leaderboard',

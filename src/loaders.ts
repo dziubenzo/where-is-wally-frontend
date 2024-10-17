@@ -1,3 +1,4 @@
+import { LoaderFunctionArgs } from 'react-router-dom';
 import API_URL from './API';
 import { ApiError } from './helpers';
 
@@ -42,6 +43,8 @@ export type HomePageLoader = {
 };
 
 export type LevelsPageLoader = Level[];
+
+export type LevelPageLoader = Level;
 
 export type LeaderboardPageLoader = {
   levels: Level[];
@@ -93,6 +96,19 @@ export async function levelsPageLoader(): Promise<LevelsPageLoader> {
   }
   const levels: Level[] = await resLevels.json();
   return levels;
+}
+
+export async function levelPageLoader({
+  params,
+}: LoaderFunctionArgs): Promise<LevelPageLoader> {
+  const resLevel = await fetch(`${API_URL}/levels/${params.id}`);
+  // Handle errors by triggering ErrorPage render with error status code and status text
+  if (!resLevel.ok) {
+    const error = new ApiError(resLevel.statusText, resLevel.status);
+    throw error;
+  }
+  const level: Level = await resLevel.json();
+  return level;
 }
 
 export async function leaderboardPageLoader(): Promise<LeaderboardPageLoader> {
