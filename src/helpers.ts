@@ -1,4 +1,5 @@
 import type { RefObject } from 'react';
+import type { SelectorPos, ZoomerPos } from './components/LevelPage';
 import type { Level } from './loaders';
 
 export type CharacterButton = {
@@ -13,7 +14,7 @@ export const getCoordinates = (
   imageRef: RefObject<HTMLImageElement>,
   event: React.MouseEvent<HTMLImageElement, MouseEvent>,
   precise: boolean = false,
-) => {
+): ZoomerPos => {
   const { width, height, left, top } =
     imageRef.current!.getBoundingClientRect();
   const positionX = Math.round(event.clientX - left);
@@ -34,7 +35,7 @@ export const getCoordinates = (
 export const getSelectorPosition = (
   imageRef: RefObject<HTMLImageElement>,
   event: React.MouseEvent<HTMLImageElement, MouseEvent>,
-) => {
+): SelectorPos => {
   const x = Math.round(
     event.clientX + window.scrollX - getCircleSize(imageRef) / 2,
   );

@@ -112,13 +112,9 @@ export default function LevelPage() {
   function handleImageHover(
     event: React.MouseEvent<HTMLImageElement, MouseEvent>,
   ) {
-    // Update position of selector, menu and zoomer
-    const newSelectorPos = getSelectorPosition(imageRef, event);
-    setSelectorPos(newSelectorPos);
-    // Get precise percent values of large image for smooth zooming
-    const { percentX, percentY } = getCoordinates(imageRef, event, true);
-    // Update zoom
-    setZoomerPos({ percentX, percentY });
+    // Update selector circle and zoomer positions
+    setSelectorPos(getSelectorPosition(imageRef, event));
+    setZoomerPos(getCoordinates(imageRef, event, true));
   }
 
   // Hide zoomer on mouse image leave
@@ -142,6 +138,8 @@ export default function LevelPage() {
     if (isSelector(event)) return;
 
     if (event.target === imageRef.current) {
+      // Force to update selector circle and zoomer positions using the image hover handler if the cursor happens to be over the image right after level load
+      if (!selectorPos.x && !selectorPos.y) handleImageHover(event);
       setShowZoomer(true);
       setShowSelectorCircle(true);
       setShowSelectorMenu(false);
