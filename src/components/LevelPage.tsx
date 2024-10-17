@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLoaderData, useLocation, useParams } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import {
-  ApiError,
   characterButtonsData,
   checkImageClick,
   getCircleSize,
@@ -9,7 +8,7 @@ import {
   getSelectorPosition,
   isSelector,
 } from '../helpers';
-import { fetchLevel, Level, LevelPageLoader } from '../loaders';
+import { LevelPageLoader } from '../loaders';
 import { StyledLevelPage } from '../styles/LevelPage.styled';
 import CharacterMarker from './CharacterMarker';
 import GameOverModal from './GameOverModal';
