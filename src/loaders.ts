@@ -102,10 +102,9 @@ export async function levelPageLoader({
   params,
 }: LoaderFunctionArgs): Promise<LevelPageLoader> {
   const resLevel = await fetch(`${API_URL}/levels/${params.id}`);
-  // Handle errors by triggering ErrorPage render with error status code and status text
   if (!resLevel.ok) {
-    const error = new ApiError(resLevel.statusText, resLevel.status);
-    throw error;
+    const errorMsg = await resLevel.json();
+    throw new ApiError(errorMsg, resLevel.status);
   }
   const level: Level = await resLevel.json();
   return level;

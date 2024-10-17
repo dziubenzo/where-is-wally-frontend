@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLoaderData, useLocation, useParams } from 'react-router-dom';
 import {
   ApiError,
   characterButtonsData,
@@ -9,15 +9,13 @@ import {
   getSelectorPosition,
   isSelector,
 } from '../helpers';
-import type { Level } from '../loaders';
+import { fetchLevel, Level, LevelPageLoader } from '../loaders';
 import { StyledLevelPage } from '../styles/LevelPage.styled';
 import CharacterMarker from './CharacterMarker';
 import GameOverModal from './GameOverModal';
 import HintMarker from './HintMarker';
 import Selector from './Selector';
 import Zoomer from './Zoomer';
-
-type LevelState = { state: Level | undefined };
 
 export type SelectorPos = {
   x: number;
@@ -31,13 +29,8 @@ export type CharacterName = 'wally' | 'wenda' | 'wizard' | 'odlaw';
 export type CharactersToFind = CharacterName[];
 
 export default function LevelPage() {
-  // Get level from Link prop
-  const { state } = useLocation() as LevelState;
-  // Handle empty state error
-  if (!state) {
-    throw new ApiError('Access level through the Levels page!', 400);
-  }
-  const { _id, url_parameter, image_url, characters } = state;
+  const level = useLoaderData() as LevelPageLoader;
+  const { _id, url_parameter, image_url, characters } = level;
 
   const imageRef = useRef<HTMLImageElement>(null);
   const startDateRef = useRef(0);

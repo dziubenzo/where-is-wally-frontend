@@ -16,7 +16,7 @@ export default function LevelCard({ level }: LevelCardProps) {
       <h2>{url_parameter}</h2>
       <p>{name}</p>
       <div style={loaded ? undefined : { visibility: 'hidden' }}>
-        <Link to={`/levels/${url_parameter}`} state={level}>
+        <Link to={`/levels/${url_parameter}`}>
           <img
             src={image_url}
             alt={`Image Preview for Level ${url_parameter}`}
