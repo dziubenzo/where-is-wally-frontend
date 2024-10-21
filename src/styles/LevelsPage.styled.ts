@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const shimmer = keyframes`
+100% {background-position-x: 600%}
+`;
 
 export const StyledLevelsPage = styled.main`
   display: grid;
@@ -61,7 +65,15 @@ export const StyledLevelCard = styled.div`
     div {
       width: 3000px;
       aspect-ratio: 16/9;
-      background-color: grey;
+      background: linear-gradient(
+        -60deg,
+        ${(props) => props.theme.colours.background} 30%,
+        ${(props) => props.theme.colours.secondary} 40%,
+        ${(props) => props.theme.colours.background} 50%
+      );
+      background-size: 40%;
+      background-position-x: 100%;
+      animation: ${shimmer} 10s infinite linear;
     }
   }
 
