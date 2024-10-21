@@ -373,11 +373,12 @@ export const StyledGameOverModal = styled.dialog`
       letter-spacing: 2px;
       background-color: ${(props) => props.theme.colours.primary};
       color: ${(props) => props.theme.colours.background};
-      padding: 2em 0.75em;
+      padding: 2.25em 0.75em;
       border-radius: 50%;
     }
 
     button {
+      width: revert;
       max-width: 200px;
       padding: 0.5em;
       border-radius: 16px;

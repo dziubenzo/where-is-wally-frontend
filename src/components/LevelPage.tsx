@@ -11,9 +11,9 @@ import {
 import { LevelPageLoader } from '../loaders';
 import { StyledLevelPage } from '../styles/LevelPage.styled';
 import CharacterMarker from './CharacterMarker';
-import GameOverModal from './GameOverModal';
 import HintMarker from './HintMarker';
 import Selector from './Selector';
+import Timer from './Timer';
 import Zoomer from './Zoomer';
 
 export type SelectorPos = {
@@ -32,7 +32,6 @@ export default function LevelPage() {
   const { _id, url_parameter, image_url, characters } = level;
 
   const imageRef = useRef<HTMLImageElement>(null);
-  const startDateRef = useRef(0);
 
   // Selector states
   const [selectorSize, setSelectorSize] = useState(0);
@@ -55,7 +54,6 @@ export default function LevelPage() {
     'odlaw',
   ]);
   const [currentClick, setCurrentClick] = useState('');
-  const [timer, setTimer] = useState(0);
 
   // Hints states
   const [showHints, setShowHints] = useState(false);
@@ -74,22 +72,6 @@ export default function LevelPage() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  // Update timer every 10 ms as long as there are characters to find
-  // Set start date
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-
-    if (charactersToFind.length) {
-      interval = setInterval(() => {
-        setTimer(timer + 0.01);
-        if (!startDateRef.current) {
-          startDateRef.current = Date.now();
-        }
-      }, 10);
-    }
-    return () => clearInterval(interval);
-  }, [charactersToFind, timer]);
 
   function handleImageClick(
     event: React.MouseEvent<HTMLImageElement, MouseEvent>,
@@ -163,10 +145,11 @@ export default function LevelPage() {
         <button onClick={handleHintButtonClick}>
           {showHints ? 'Hide' : 'Show'} Hints
         </button>
-        <div>
-          <p>Time:</p>
-          <span>{timer.toFixed(2)}</span>
-        </div>
+        <Timer
+          charactersToFind={charactersToFind}
+          levelId={_id}
+          hintsUsed={hintsUsed}
+        />
       </div>
       <img
         ref={imageRef}
@@ -218,14 +201,6 @@ export default function LevelPage() {
           />
         );
       })}
-      {!charactersToFind.length && (
-        <GameOverModal
-          levelId={_id}
-          startDateRef={startDateRef}
-          timer={timer}
-          hintsUsed={hintsUsed}
-        />
-      )}
     </StyledLevelPage>
   );
 }
