@@ -15,7 +15,7 @@ export default function LevelCard({ level }: LevelCardProps) {
     <StyledLevelCard>
       <h2>{url_parameter}</h2>
       <p>{name}</p>
-      <div style={loaded ? undefined : { visibility: 'hidden' }}>
+      <div style={loaded ? undefined : { display: 'none' }}>
         <Link to={`/levels/${url_parameter}`}>
           <img
             src={image_url}
@@ -25,6 +25,12 @@ export default function LevelCard({ level }: LevelCardProps) {
             }}
           />
         </Link>
+      </div>
+      <div
+        className="placeholder-div"
+        style={!loaded ? undefined : { display: 'none' }}
+      >
+        <div />
       </div>
     </StyledLevelCard>
   );

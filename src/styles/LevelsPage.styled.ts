@@ -37,6 +37,7 @@ export const StyledLevelCard = styled.div`
     height: 100%;
     overflow: hidden;
     border-radius: 0 0 8px 8px;
+    aspect-ratio: 16/9;
 
     a {
       text-decoration: none;
@@ -45,8 +46,22 @@ export const StyledLevelCard = styled.div`
     img {
       width: 100%;
       height: 100%;
+      aspect-ratio: 16/9;
       transform: scale(1.5);
       filter: contrast(1.2);
+    }
+  }
+
+  .placeholder-div {
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0 0 8px 8px;
+    aspect-ratio: 16/9;
+
+    div {
+      width: 3000px;
+      aspect-ratio: 16/9;
+      background-color: grey;
     }
   }
 
