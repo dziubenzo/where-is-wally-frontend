@@ -17,8 +17,9 @@ A Where's Wally app featuring 7 levels, image magnifying glass, level hints and 
 - Hover over the image to see the zoomed-in preview of the main image
 - Click the image to see buttons with characters to find if you're not familiar with how the hidden characters look
 - Once you've found a character, click the image and then click its button
-- Already found characters will be marked on the main image with a green circle
-- Continue until you've found all four characters to submit your record
+- The button will turn green for a short while if your guess is correct
+- The characters you've already found will be marked on the main image with a green circle
+- Continue until you've found all four characters to submit your record if you wish
 
 ### Tech Stack
 
