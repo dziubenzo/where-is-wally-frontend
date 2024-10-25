@@ -1,3 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = 'https://where-is-wally-backend.fly.dev';
+// const API_URL = 'http://192.168.0.13:3000';
 
 export default API_URL;
